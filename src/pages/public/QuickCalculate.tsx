@@ -123,116 +123,92 @@ const QuickCalculate = () => {
     setShowingResult(false);
   };
 
-  return (
-    <div className="h-full w-full flex flex-col pb-5">
+return (
+    <div className="min-h-screen w-full flex flex-col bg-[#EBF4F6]">
       {!isRunning ? (
         <NavBar pageName="showQuickCalculate" />
       ) : (
-        <div className="h-16 w-full center text-2xl md:text-4xl text-gray-200 dark:bg-[#071952] dark:text-gray-800 baloo-bhai">
+        <div className="h-16 w-full flex items-center justify-center text-xl md:text-3xl text-white bg-[#09637E] baloo-bhai shadow-md">
           Quick Calculate - Keep Going!
         </div>
       )}
-      <div className="pb-10 flex flex-col md:flex-row flex-grow gap-10 items-center justify-center dark:bg-[#071952]">
-        {/* left part */}
-        <div className="h-[310px] w-[380px] md:h-[480px] md:w-[750px] mt-10 md:mt-1 p-3 border border-[#088395] rounded-2xl">
-          {/* time part */}
-          <div className="h-[10%] w-full flex items-center md:items-start">
-            <div className="h-6 w-6 md:h-10 md:w-10">
-              <img src={clock} alt="clock" />
-            </div>
-            <div className="ml-2 text-2xl md:text-5xl text-[#088395] baloo-bhai">
+
+      <div className="dark:bg-[#071952] flex flex-col md:flex-row grow gap-6 md:gap-12 items-center justify-center p-4">
+        {/* Main Game Card */}
+        <div className="w-full max-w-[380px] md:max-w-[750px] bg-white p-4 md:p-6 border-2 border-[#7AB2B2] dark:bg-[#071952] rounded-3xl shadow-xl">
+          {/* Timer Header */}
+          <div className="flex items-center mb-4 bg-[#EBF4F6] w-fit px-4 py-1 rounded-full border border-[#7AB2B2]">
+            <img src={clock} alt="clock" className="h-5 w-5 md:h-8 md:w-8" />
+            <div className="ml-2 text-xl md:text-4xl text-[#09637E] font-bold baloo-bhai">
               00:{isRunning ? timeCount.toString().padStart(2, "0") : "00"}
             </div>
           </div>
-          {/* question part */}
-          <div className="h-[30%] w-full bg-slate-200 rounded-t-2xl center baloo-bhai text-3xl md:text-6xl">
-            <div className="h-full w-full center ">
-              <div>
-                {num1} {operator} {num2} =
-              </div>
-              <div className="h-[50px] w-[60px] md:h-[85px] md:w-[136px] ml-3 bg-white border border-[#088395] center rounded-lg overflow-hidden">
+
+          {/* Question Display */}
+          <div className="h-32 md:h-48 w-full bg-[#09637E] rounded-2xl flex items-center justify-center baloo-bhai text-4xl md:text-7xl text-white shadow-inner mb-6">
+            <div className="flex items-center gap-4">
+              <span>{num1} {operator} {num2} =</span>
+              <div className="min-w-[70px] md:min-w-[140px] px-2 py-1 bg-white text-[#088395] border-4 border-[#7AB2B2] rounded-xl flex items-center justify-center">
                 {quickNum}
               </div>
             </div>
           </div>
-          {/* number part */}
-          <div className="h-[60%] w-full">
-            <div className="h-1/3 flex justify-between">
-              {[1, 2, 3, 4, 5].map((n) => (
-                <Number key={n} number={n} />
-              ))}
-            </div>
-            <div className="h-1/3 my-1 flex justify-between">
-              {[6, 7, 8, 9, 0].map((n) => (
-                <Number key={n} number={n} />
-              ))}
-            </div>
-            <div className="h-1/3 flex">
-              <div
-                className="h-full w-1/2 mr-2 bg-[#088395] hover:bg-yellow-500   hover:cursor-pointer text-[#071952] rounded-lg center text-2xl md:text-6xl baloo-bhai"
-                onClick={handleClear}
-              >
-                Clear
-              </div>
-              <div
-                className="h-full w-1/2 ml-2 bg-[#088395] hover:bg-green-500  hover:cursor-pointer text-white rounded-lg center text-2xl md:text-6xl baloo-bhai"
-                onClick={handleSubmit}
-              >
-                Submit
-              </div>
-            </div>
+
+          {/* Keypad */}
+          <div className="grid grid-cols-5 gap-2 md:gap-4 mb-4">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((n) => (
+              <Number key={n} number={n} />
+            ))}
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex gap-3 md:gap-6 h-14 md:h-20">
+            <button
+              className="flex-1 bg-[#7AB2B2] hover:bg-orange-400 text-white rounded-xl flex items-center justify-center text-xl md:text-4xl baloo-bhai transition-colors shadow-md active:scale-95"
+              onClick={handleClear}
+            >
+              Clear
+            </button>
+            <button
+              className="flex-1 bg-[#088395] hover:bg-[#09637E] text-white rounded-xl flex items-center justify-center text-xl md:text-4xl baloo-bhai transition-colors shadow-md active:scale-95"
+              onClick={handleSubmit}
+            >
+              Submit
+            </button>
           </div>
         </div>
-        {/* right part */}
-        <div className="h-12 md:h-[480px] w-[350px] flex flex-col justify-between items-center dark:text-white">
-          <div className="text-2xl md:text-4xl baloo-bhai hidden md:flex">
-            Quick Calculate
+
+        {/* Sidebar Stats */}
+        <div className="w-full max-w-[350px] flex flex-col gap-6 items-center bg-white md:bg-transparent p-6 md:p-0 rounded-3xl">
+          <div className="text-3xl md:text-4xl baloo-bhai text-[#09637E] dark:text-white hidden md:block">
+            Live Stats
           </div>
-          <div className="flex flex-col gap-5 ">
-            <HighestScore />
-            <div className="center flex-col">
-              <div className="baloo-bhai2 text-sm md:text-2xl">
-                Total Attempt
-              </div>
-              <div className="baloo-bhai text-2xl md:text-5xl">
-                {scoreBoard.totalAttempt}
-              </div>
-            </div>
-            <div className="center flex-col">
-              <div className="baloo-bhai2 text-sm md:text-2xl">
-                Wrong Answer
-              </div>
-              <div className="baloo-bhai text-2xl md:text-5xl">
-                {scoreBoard.wrongAnswer}
-              </div>
-            </div>
-            <div className="center flex-col">
-              <div className="baloo-bhai2 text-sm md:text-2xl">
-                Correct Answer
-              </div>
-              <div className="baloo-bhai text-2xl md:text-5xl">
-                {scoreBoard.correctAnswer}
-              </div>
-            </div>
+          
+          <div className="grid grid-cols-3 md:grid-cols-1 gap-4 w-full">
+             <HighestScore />
+             <StatCard label="Total" value={scoreBoard.totalAttempt} color="text-[#09637E]" />
+             <StatCard label="Wrong" value={scoreBoard.wrongAnswer} color="text-red-500" />
+             <StatCard label="Correct" value={scoreBoard.correctAnswer} color="text-green-600" />
           </div>
 
           {!isRunning ? (
-            <div
-              className="h-10 w-40 bg-[#088395] hover:bg-[#066574] hover:cursor-pointer text-white rounded-lg center text-2xl md:text-3xl baloo-bhai"
+            <button
+              className="w-full md:w-48 py-3 bg-[#088395] hover:bg-[#09637E] text-white rounded-2xl text-2xl baloo-bhai shadow-lg transition-transform hover:scale-105"
               onClick={startCountDown}
             >
-              Start
-            </div>
+              Start Game
+            </button>
           ) : (
-            <div
-              className="h-10 w-40 bg-[#FF0000] hover:bg-[#b30000] hover:cursor-pointer text-white rounded-lg center text-2xl md:text-3xl baloo-bhai"
+            <button
+              className="w-full md:w-48 py-3 bg-red-500 hover:bg-red-600 text-white rounded-2xl text-2xl baloo-bhai shadow-lg transition-transform hover:scale-105"
               onClick={endCountDown}
             >
-              End
-            </div>
+              Quit Game
+            </button>
           )}
         </div>
       </div>
+
       {showingResult && (
         <ShowingResult
           scoreBoard={scoreBoard}
@@ -245,3 +221,11 @@ const QuickCalculate = () => {
 };
 
 export default QuickCalculate;
+
+// Helper component for layout cleanliness
+const StatCard = ({ label, value, color }: any) => (
+  <div className="flex flex-col items-center bg-white p-2 md:p-4 rounded-2xl shadow-sm border border-[#7AB2B2]/30 w-full">
+    <div className="baloo-bhai2 text-xs md:text-lg text-gray-500 uppercase">{label}</div>
+    <div className={`baloo-bhai text-xl md:text-4xl ${color}`}>{value}</div>
+  </div>
+);

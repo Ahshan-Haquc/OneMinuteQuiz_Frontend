@@ -5,10 +5,7 @@ const Number = ({ number }: { number: number }) => {
   const dispatch = useAppDispatch();
   const quickNum = useAppSelector((state) => state.quiz.quickNum);
   const handleClick = () => {
-    // Update the quickNum state by multiplying the previous value by 10 and adding the clicked number
-    // This allows for multi-digit numbers to be formed as the user clicks on the buttons
-    // For example, if the previous value is 5 and the clicked number is 3, it will become 53
-    // If the previous value is 0 and the clicked number is 7, it will
+
     dispatch(setQuickNum(quickNum * 10 + number));
   };
 
