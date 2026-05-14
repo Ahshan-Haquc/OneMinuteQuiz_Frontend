@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAuthUser } from "../context/AuthContext";
+import { useAuthUser } from "@/contexts/AuthContext";
 import { FaEnvelope, FaLock, FaBolt } from 'react-icons/fa';
 
 const Login = () => {

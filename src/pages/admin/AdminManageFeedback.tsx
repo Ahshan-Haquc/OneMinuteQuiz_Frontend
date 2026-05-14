@@ -1,5 +1,5 @@
-import AdminNavBar from "../components/AdminNavBar";
-import RatingBarChart from "../components/quickQuiz/RatingBarChart";
+import AdminNavBar from "@/components/AdminNavBar";
+import RatingBarChart from "@/components/quickQuiz/RatingBarChart";
 import { useState, useEffect } from "react";
 
 const AdminManageUsers = () => {

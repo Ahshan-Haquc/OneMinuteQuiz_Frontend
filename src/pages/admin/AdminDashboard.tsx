@@ -1,4 +1,4 @@
-import AdminNavBar from "../components/AdminNavBar";
+import AdminNavBar from "@/components/AdminNavBar";
 import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 const AdminDashboard = () => {

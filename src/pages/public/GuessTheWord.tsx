@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "../components/NavBar";
-import Footer from "../components/Footer";
-import clock from "../assets/icons/clock.png";
-import CharInputBox from "../components/guessQuiz/CharInputBox";
+import NavBar from "@/components/NavBar";
+import Footer from "@/components/Footer";
+import clock from "@/assets/icons/clock.png";
+import CharInputBox from "@/components/guessQuiz/CharInputBox";
 
 const WORDS = ["APPLE", "MANGO", "CHAIR", "PHONE", "PLANT"];
 

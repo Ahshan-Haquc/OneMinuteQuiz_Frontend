@@ -1,11 +1,11 @@
 import { use, useEffect, useState } from "react";
-import clock from "../assets/icons/clock.png";
-import Footer from "../components/Footer";
-import NavBar from "../components/NavBar";
-import Number from "../components/quickQuiz/Number";
-import ShowingResult from "../components/quickQuiz/ShowingResult";
-import { useStoreClickedNum } from "../context/quickCalculate/StoreClickedNum";
-import HighestScore from "../components/quickQuiz/HighestScore";
+import clock from "@/assets/icons/clock.png";
+import Footer from "@/components/Footer";
+import NavBar from "@/components/NavBar";
+import Number from "@/components/quickQuiz/Number";
+import ShowingResult from "@/components/quickQuiz/ShowingResult";
+import { useStoreClickedNum } from "@/contexts/quickCalculate/StoreClickedNum";
+import HighestScore from "@/components/quickQuiz/HighestScore";
 
 const operators = ["+", "-", "*"];
 

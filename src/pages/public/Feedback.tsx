@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import starIcon from "../assets/icons/star.png";
-import Footer from "../components/Footer";
-import NavBar from "../components/NavBar";
-import { useAuthUser } from "../context/AuthContext";
+import starIcon from "@/assets/icons/star.png";
+import Footer from "@/components/Footer";
+import NavBar from "@/components/NavBar";
+import { useAuthUser } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const Feedback = () => {
