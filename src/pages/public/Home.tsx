@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
 import { useAppSelector } from "@/redux/hooks";
 const Home = () => {
