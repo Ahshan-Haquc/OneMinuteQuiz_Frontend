@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
-const CharInputBox = ({ value, index, onChange, isDisabled, autoFocus }) => {
-  const inputRef = useRef(null);
+const CharInputBox = ({ value, index, onChange, isDisabled, autoFocus }: any) => {
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (autoFocus && inputRef.current) {

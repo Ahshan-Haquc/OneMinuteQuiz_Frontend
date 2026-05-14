@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setQuickNum } from "@/redux/features/quiz/quizSlice";
 
-const Number = ({ number }) => {
+const Number = ({ number }: { number: number }) => {
   const dispatch = useAppDispatch();
   const quickNum = useAppSelector((state) => state.quiz.quickNum);
   const handleClick = () => {

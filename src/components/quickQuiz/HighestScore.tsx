@@ -1,4 +1,4 @@
-import { Medal } from "lucide-react";
+
 
 export default function HighestScore() {
     return (

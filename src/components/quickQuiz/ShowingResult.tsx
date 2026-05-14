@@ -1,4 +1,4 @@
-const ShowingResult = ({ scoreBoard, onClose, resetStates }) => {
+const ShowingResult = ({ scoreBoard, onClose, resetStates }: any) => {
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50">
       <div className="w-[90%] max-w-[550px] bg-gradient-to-br from-[#0f2027] via-[#203a43] to-[#2c5364] text-white rounded-2xl shadow-2xl p-8 relative animate-fadeIn">

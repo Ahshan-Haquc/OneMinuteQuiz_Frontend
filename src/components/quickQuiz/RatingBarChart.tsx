@@ -1,8 +1,8 @@
-import React from "react";
 
-const RatingBarChart = ({ ratingData, averageRating }) => {
+
+const RatingBarChart = ({ ratingData, averageRating }: any) => {
   // Example structure: { 5: 12, 4: 8, 3: 4, 2: 2, 1: 1 }
-  const maxCount = Math.max(...Object.values(ratingData));
+  const maxCount = Math.max(...(Object.values(ratingData) as number[]));
 
   return (
     <div className="w-full max-w-2xl mx-auto p-4 bg-white shadow-md rounded-lg">
