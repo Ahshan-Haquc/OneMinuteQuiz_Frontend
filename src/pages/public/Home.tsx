@@ -9,9 +9,9 @@ const Home = () => {
     document.title = "1MinuteQuiz";
   }, []);
   return (
-    <div className="h-full w-full flex flex-col">
+    <div className="min-h-screen w-full flex flex-col">
       <NavBar pageName="showHomePage" />
-      <div className="pb-10 flex flex-col flex-grow gap-10 items-center justify-center dark:bg-[#071952]">
+      <div className="pb-10  grow flex flex-col  gap-10 items-center justify-center dark:bg-[#071952]">
         {/* text part  */}
         <div className="center flex-col text-[#37B7C3]">
           <div className="text-3xl md:text-6xl center baloo-bhai">
@@ -45,7 +45,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
