@@ -16,7 +16,7 @@ function AuthLoader({ children }: { children: React.ReactNode }) {
 
 function App() {
   return (
-    <div className="bg-[#EBF4F6] min-h-screen w-screen">
+    <div className="min-h-screen w-screen">
       <Provider store={store}>
         <AuthLoader>
           <RouterProvider router={router} />
