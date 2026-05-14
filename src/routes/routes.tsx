@@ -30,11 +30,11 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "guess-the-word",
+        path: "guessTheWord",
         element: <GuessTheWord />,
       },
       {
-        path: "quick-calculate",
+        path: "quickCalculate",
         element: <QuickCalculate />,
       },
       {
@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
         element: <Feedback />,
       },
       {
-        path: "quiz-info",
+        path: "quizInfo",
         element: <QuizInfo />,
       },
       {
