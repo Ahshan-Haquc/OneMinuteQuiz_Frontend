@@ -1,16 +1,17 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import clock from "@/assets/icons/clock.png";
-import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
 import Number from "@/components/quickQuiz/Number";
 import ShowingResult from "@/components/quickQuiz/ShowingResult";
-import { useStoreClickedNum } from "@/contexts/quickCalculate/StoreClickedNum";
+import { useAppSelector, useAppDispatch } from "@/redux/hooks";
+import { setQuickNum } from "@/redux/features/quiz/quizSlice";
 import HighestScore from "@/components/quickQuiz/HighestScore";
 
 const operators = ["+", "-", "*"];
 
 const QuickCalculate = () => {
-  const { quickNum, setQuickNum } = useStoreClickedNum();
+  const quickNum = useAppSelector((state) => state.quiz.quickNum);
+  const dispatch = useAppDispatch();
   const [showingResult, setShowingResult] = useState(false);
   const [timeCount, setTimeCount] = useState(60);
   const [scoreBoard, setScoreBoard] = useState({
@@ -23,7 +24,7 @@ const QuickCalculate = () => {
   const [num2, setNum2] = useState(0);
   const [operator, setOperator] = useState("+");
   const [isRunning, setIsRunning] = useState(false);
-  const [timerId, setTimerId] = useState(null);
+  const [timerId, setTimerId] = useState<any>(null);
 
   useEffect(() => {
     document.title = "Quick Calculate";
@@ -73,7 +74,7 @@ const QuickCalculate = () => {
     if (timerId) clearInterval(timerId);
     setIsRunning(false);
     setTimeCount(60);
-    setQuickNum(0);
+    dispatch(setQuickNum(0));
     setScoreBoard({ totalAttempt: 0, wrongAnswer: 0, correctAnswer: 0 });
     setNum1(0);
     setNum2(0);
@@ -107,12 +108,12 @@ const QuickCalculate = () => {
       }));
     }
 
-    setQuickNum(0);
+    dispatch(setQuickNum(0));
     generateNewQuestion();
   };
 
   const handleClear = () => {
-    setQuickNum(0);
+    dispatch(setQuickNum(0));
   };
 
   const handleShowResultPopup = () => {

@@ -1,40 +1,41 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import starIcon from "@/assets/icons/star.png";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
-import { useAuthUser } from "@/contexts/AuthContext";
+import { useAppSelector } from "@/redux/hooks";
+import { useSubmitFeedbackMutation } from "@/redux/api/endpoints/feedbackApi";
 import { useNavigate } from "react-router-dom";
 
 const Feedback = () => {
   const [selectedRating, setSelectedRating] = useState(5);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [feedbackText, setFeedbackText] = useState("");
-  const { user } = useAuthUser();
+  const { user } = useAppSelector((state) => state.auth);
+  const [submitFeedback] = useSubmitFeedbackMutation();
   const navigate = useNavigate();
 
   const ratings = [5, 4, 3, 2, 1];
 
-  const handleRatingSelect = (rating) => {
+  const handleRatingSelect = (rating: number) => {
     setSelectedRating(rating);
     setIsDropdownOpen(false);
   };
 
   const handleSubmitFeedback = async () => {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/feedback`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    try {
+      if (!user) {
+        alert("Please login first to submit feedback!");
+        return;
+      }
+      await submitFeedback({
         userId: user._id,
         userName: user.name,
         feedbackText: feedbackText,
         rating: selectedRating,
-      }),
-    });
-    if (response.ok) {
+      }).unwrap();
+      
       alert("Thanks for your feedback!!!");
       navigate("/");
-    }
-    try {
     } catch (error) {
       alert("Feedback not sent. Please try later!");
     }

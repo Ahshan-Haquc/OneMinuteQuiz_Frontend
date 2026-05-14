@@ -1,48 +1,35 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useSignupMutation } from "@/redux/api/endpoints/authApi";
 import { FaUser, FaEnvelope, FaLock, FaCog } from 'react-icons/fa';
 
 const Signup = () => {
   const [user, setUser] = useState({ userName: "", email: "", password: "" });
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [signup, { isLoading: loading }] = useSignupMutation();
 
   useEffect(() => {
     document.title = "Sign Up - 1MinuteQuiz";
     alert("You do not need to verify your email. It is open for all. Just create an account with random email and password to explore the website.")
   }, []);
 
-  const handleInput = (e) => {
+  const handleInput = (e: any) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/signup`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: user.userName,
-          email: user.email,
-          password: user.password,
-        }),
-        credentials: "include",
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        navigate("/login");
-      } else {
-        alert(data.error || "Signup failed. Please try again.");
-      }
-    } catch (error) {
+      await signup({
+        name: user.userName,
+        email: user.email,
+        password: user.password,
+      }).unwrap();
+      navigate("/login");
+    } catch (error: any) {
       console.error("Error during signup:", error);
-      alert("An error occurred during signup. Please try again.");
-    } finally {
-      setLoading(false);
+      alert(error?.data?.error || "An error occurred during signup. Please try again.");
     }
   };
 

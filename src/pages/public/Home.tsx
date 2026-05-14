@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
-import { useAuthUser } from "@/contexts/AuthContext";
+import { useAppSelector } from "@/redux/hooks";
 const Home = () => {
-  const { user } = useAuthUser();
+  const { user } = useAppSelector((state) => state.auth);
   useEffect(() => {
     document.title = "1MinuteQuiz";
   }, []);
@@ -15,7 +15,7 @@ const Home = () => {
         {/* text part  */}
         <div className="center flex-col text-[#37B7C3]">
           <div className="text-3xl md:text-6xl center baloo-bhai">
-            Welcome, {user.name}
+            Welcome, {user?.name}
           </div>
           <div className="text-md md:text-2xl center baloo-bhai2">
             Are You Ready to Take an Attempt in the quize !

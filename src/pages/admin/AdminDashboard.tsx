@@ -1,38 +1,16 @@
 import AdminNavBar from "@/components/AdminNavBar";
 import { NavLink } from "react-router-dom";
-import { useState, useEffect } from "react";
-const AdminDashboard = () => {
-  const [dashboardValues, setDashboardValues] = useState({
-    totalUserCount: 0,
-    totalFeedbackCount: 0,
-  });
-  useEffect(() => {
-    const fetchDashboardData = async () => {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/loadAdminDashboardValues`,
-          {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-          }
-        );
-        const data = await response.json();
-        if (response.ok) {
-          setDashboardValues({
-            totalUserCount: data.userCount,
-            totalFeedbackCount: data.feedbackCount,
-          });
-        } else {
-          alert("Response not come.");
-        }
-      } catch (error) {
-        console.log("Error is fetching this page data : ", error);
-        alert("Error catched.");
-      }
-    };
+import { useGetDashboardInfoQuery } from "@/redux/api/endpoints/adminApi";
 
-    fetchDashboardData();
-  }, []);
+const AdminDashboard = () => {
+  const { data, isLoading, error } = useGetDashboardInfoQuery();
+  const dashboardValues = {
+    totalUserCount: data?.userCount || 0,
+    totalFeedbackCount: data?.feedbackCount || 0,
+  };
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading dashboard.</div>;
   return (
     <div className="h-full w-full flex flex-col">
       <AdminNavBar pageName="showHomePage" />
@@ -44,7 +22,7 @@ const AdminDashboard = () => {
             {dashboardValues.totalUserCount}
           </div>
           <NavLink
-            to="/adminManageUsers"
+            to="/admin/manage-users"
             className="h-9 md:h-12 w-[200px] md:w-[400px] bg-[#37B7C3] rounded-md center text-xl md:text-4xl hover:bg-[#35aab4]"
           >
             Manage Users
@@ -57,7 +35,7 @@ const AdminDashboard = () => {
             {dashboardValues.totalFeedbackCount}
           </div>
           <NavLink
-            to="/adminManageFeedback"
+            to="/admin/manage-feedback"
             className="h-9 md:h-12  w-[200px] md:w-[400px] bg-[#37B7C3] rounded-md center text-xl md:text-4xl hover:bg-[#35aab4]"
           >
             Manage Feedbacks

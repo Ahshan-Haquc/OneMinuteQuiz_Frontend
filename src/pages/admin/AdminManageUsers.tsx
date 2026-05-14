@@ -1,47 +1,18 @@
 import AdminNavBar from "@/components/AdminNavBar";
-import { useState, useEffect } from "react";
+import { useGetDashboardInfoQuery, useDeleteUserMutation } from "@/redux/api/endpoints/adminApi";
 
 const AdminManageUsers = () => {
-  const [totalUsers, setTotalUsers] = useState([]);
-  useEffect(() => {
-    const fetchDashboardData = async () => {
-      try {
-        const response = await fetch(
-          "http://localhost:3000/loadAdminDashboardValues",
-          {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-          }
-        );
-        const data = await response.json();
-        if (response.ok) {
-          setTotalUsers(data.users);
-        } else {
-          alert("Response not come.");
-        }
-      } catch (error) {
-        console.log("Error is fetching this page data : ", error);
-        alert("Error catched.");
-      }
-    };
+  const { data, isLoading, error } = useGetDashboardInfoQuery();
+  const [deleteUser] = useDeleteUserMutation();
+  const totalUsers = data?.users || [];
 
-    fetchDashboardData();
-  }, [totalUsers]);
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading users.</div>;
 
-  const deleteUserAccount = async (userId) => {
+  const deleteUserAccount = async (userId: string) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/deleteUser`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId }),
-      });
-      if (response.ok) {
-        const data = await response.json();
-        alert("Account deleted succesfully.");
-        setTotalUsers(data.newUsers);
-      } else {
-        alert("Not deleted. Please try again.....");
-      }
+      await deleteUser(userId).unwrap();
+      alert("Account deleted succesfully.");
     } catch (error) {
       alert("Something is wrong to delete the account! Please try again.");
     }
@@ -65,7 +36,7 @@ const AdminManageUsers = () => {
             </tr>
           </thead>
           <tbody className="bg-[#EBF4F6] text-md">
-            {totalUsers.map((user, index) => (
+            {totalUsers.map((user: any, index: number) => (
               <tr key={user.id} className="border-b border-gray-300">
                 <td className="py-3 px-4">{index + 1}</td>
                 <td className="py-3 px-4">{user.name}</td>

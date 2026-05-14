@@ -1,55 +1,23 @@
 import AdminNavBar from "@/components/AdminNavBar";
 import RatingBarChart from "@/components/quickQuiz/RatingBarChart";
-import { useState, useEffect } from "react";
+import { useGetDashboardInfoQuery } from "@/redux/api/endpoints/adminApi";
+import { useDeleteFeedbackMutation } from "@/redux/api/endpoints/feedbackApi";
 
 const AdminManageUsers = () => {
-  const [totalFeedbacks, setTotalFeedbacks] = useState([]);
-  const [ratingCount, setRatingCount] = useState({});
-  const [averageRating, setAverageRating] = useState(0);
-  useEffect(() => {
-    const fetchDashboardData = async () => {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/loadAdminDashboardValues`,
-          {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-          }
-        );
-        const data = await response.json();
-        console.log("data come:", data);
-        if (response.ok) {
-          setTotalFeedbacks(data.userFeedbacks);
-          setRatingCount(data.ratingCount);
-          setAverageRating(data.averageRating);
-          console.log(ratingCount);
-          console.log(averageRating);
-        } else {
-          alert("Response not come.");
-        }
-      } catch (error) {
-        console.log("Error is fetching this page data : ", error);
-        alert("Error catched.");
-      }
-    };
+  const { data, isLoading, error } = useGetDashboardInfoQuery();
+  const [deleteFeedback] = useDeleteFeedbackMutation();
 
-    fetchDashboardData();
-  }, [totalFeedbacks]);
+  const totalFeedbacks = data?.userFeedbacks || [];
+  const ratingCount = data?.ratingCount || {};
+  const averageRating = data?.averageRating || 0;
 
-  const deleteUserAccount = async (userFeedbackId) => {
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading feedbacks.</div>;
+
+  const deleteUserAccount = async (userFeedbackId: string) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/deleteFeedback`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userFeedbackId }),
-      });
-      if (response.ok) {
-        const data = await response.json();
-        alert("Feedback deleted succesfully.");
-        setTotalFeedbacks(data.newFeedback);
-      } else {
-        alert("Not deleted. Please try again.....");
-      }
+      await deleteFeedback(userFeedbackId).unwrap();
+      alert("Feedback deleted succesfully.");
     } catch (error) {
       alert("Something is wrong to delete the account! Please try again.");
     }
@@ -77,7 +45,7 @@ const AdminManageUsers = () => {
             </tr>
           </thead>
           <tbody className="bg-[#EBF4F6] text-md ">
-            {totalFeedbacks.map((feedback, index) => (
+            {totalFeedbacks.map((feedback: any, index: number) => (
               <tr key={feedback._id} className="border-b border-gray-300">
                 <td className="py-3 px-4">{index + 1}</td>
                 <td className="py-3 px-4">{feedback.userName}</td>

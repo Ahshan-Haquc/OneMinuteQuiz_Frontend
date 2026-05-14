@@ -1,14 +1,15 @@
-import { useContext } from "react";
-import { StoreClickedNumContext } from "../../context/quickCalculate/StoreClickedNum";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { setQuickNum } from "@/redux/features/quiz/quizSlice";
 
 const Number = ({ number }) => {
-  const { setQuickNum } = useContext(StoreClickedNumContext);
+  const dispatch = useAppDispatch();
+  const quickNum = useAppSelector((state) => state.quiz.quickNum);
   const handleClick = () => {
     // Update the quickNum state by multiplying the previous value by 10 and adding the clicked number
     // This allows for multi-digit numbers to be formed as the user clicks on the buttons
     // For example, if the previous value is 5 and the clicked number is 3, it will become 53
     // If the previous value is 0 and the clicked number is 7, it will
-    setQuickNum((prev) => prev * 10 + number);
+    dispatch(setQuickNum(quickNum * 10 + number));
   };
 
   return (

@@ -1,23 +1,16 @@
 import { NavLink, useNavigate } from "react-router-dom";
+import { useLogoutMutation } from "@/redux/api/endpoints/authApi";
 
-import darkmode from "../assets/icons/darkmode.png";
 import home from "../assets/icons/home.png";
-import info from "../assets/icons/info.png";
-import logout from "../assets/icons/logout.png";
-import feedback from "../assets/icons/rate.png";
+import logoutIcon from "../assets/icons/logout.png";
 
-const AdminNavBar = (props) => {
+const AdminNavBar = (props: any) => {
   const navigate = useNavigate();
+  const [logout] = useLogoutMutation();
 
-  const performLogout = () => {
-    localStorage.removeItem("token");
-
+  const performLogout = async () => {
     try {
-      fetch("http://localhost:3000/logout", {
-        method: "GET",
-        credentials: "include", // it is must for sending cookie
-      });
-
+      await logout().unwrap();
       navigate("/login");
     } catch (error) {
       console.error("Error during logout:", error);
@@ -35,7 +28,7 @@ const AdminNavBar = (props) => {
         1MinuteQuiz
       </div>
       <NavLink
-        to="/adminDashboard"
+        to="/admin"
         className={`${
           props.pageName !== "showHomePage" ? "flex" : "hidden"
         } group h-9 w-9 md:h-12 md:w-12 p-3 rounded-full bg-[#088395] text-white duration-300 hover:bg-white hover:text-[#088395] flex items-center justify-center`}
@@ -54,7 +47,7 @@ const AdminNavBar = (props) => {
         >
           <img
             className="h-full w-full object-cover group-hover:invert-0 group-hover:brightness-100 invert brightness-0"
-            src={logout}
+            src={logoutIcon}
             alt=""
           />
         </div>

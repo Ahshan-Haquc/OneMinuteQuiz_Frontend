@@ -1,13 +1,13 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
-import { useAuthUser } from "@/contexts/AuthContext";
+import { useAppSelector } from "@/redux/hooks";
 
 interface AdminRouteProps {
   children: ReactNode;
 }
 
 const AdminRoute = ({ children }: AdminRouteProps) => {
-  const { user } = useAuthUser();
+  const { user } = useAppSelector((state) => state.auth);
 
   if (user === undefined) {
     return <div>Loading...</div>; // Still verifying auth

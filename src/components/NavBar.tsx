@@ -1,43 +1,33 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import darkmode from "../assets/icons/darkmode.png";
-import { useDarkMode } from "../context/DarkModeContext";
+import { useAppSelector, useAppDispatch } from "@/redux/hooks";
+import { toggleDarkMode } from "@/redux/features/ui/uiSlice";
+import { useLogoutMutation } from "@/redux/api/endpoints/authApi";
 import home from "../assets/icons/home.png";
 import info from "../assets/icons/info.png";
-import logout from "../assets/icons/logout.png";
+import logoutIcon from "../assets/icons/logout.png";
 import feedback from "../assets/icons/rate.png";
 
-const NavBar = ({ pageName }) => {
+const NavBar = ({ pageName }: { pageName?: string }) => {
   const navigate = useNavigate();
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const { darkMode, setDarkMode } = useDarkMode();
+  const dispatch = useAppDispatch();
+  const darkMode = useAppSelector((state) => state.ui.darkMode);
+  const [logout] = useLogoutMutation();
 
-  // Get previously saved preference
-  useEffect(() => {
-    const savedMode = localStorage.getItem("darkMode") === "true";
-    setIsDarkMode(savedMode);
-  }, []);
-
-  // Apply dark mode class to <html> and save preference
   useEffect(() => {
     const root = window.document.documentElement;
-    if (isDarkMode) {
+    if (darkMode) {
       root.classList.add("dark");
-      localStorage.setItem("darkMode", "true");
     } else {
       root.classList.remove("dark");
-      localStorage.setItem("darkMode", "false");
     }
-  }, [isDarkMode]);
+  }, [darkMode]);
 
-  const performLogout = () => {
-    localStorage.removeItem("token");
+  const performLogout = async () => {
     try {
-      fetch("http://localhost:3000/logout", {
-        method: "GET",
-        credentials: "include",
-      });
+      await logout().unwrap();
       navigate("/login");
     } catch (error) {
       console.error("Error during logout:", error);
@@ -87,7 +77,7 @@ const NavBar = ({ pageName }) => {
 
         {/* Dark Mode Toggle Button */}
         <button
-          onClick={() => setDarkMode(!darkMode)}
+          onClick={() => dispatch(toggleDarkMode())}
           className="group h-9 w-9 md:h-12 md:w-12 p-2 rounded-full bg-[#088395] text-white duration-300 hover:bg-white hover:text-[#088395] flex items-center justify-center"
         >
           <img
@@ -118,7 +108,7 @@ const NavBar = ({ pageName }) => {
         >
           <img
             className="h-full w-full object-cover group-hover:invert-0 group-hover:brightness-100 invert brightness-0"
-            src={logout}
+            src={logoutIcon}
             alt="logout"
           />
         </div>

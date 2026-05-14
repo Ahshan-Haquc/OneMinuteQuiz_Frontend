@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAuthUser } from "@/contexts/AuthContext";
+import { useAppDispatch } from "@/redux/hooks";
+import { setUser } from "@/redux/features/auth/authSlice";
+import { useLoginMutation } from "@/redux/api/endpoints/authApi";
 import { FaEnvelope, FaLock, FaBolt } from 'react-icons/fa';
 
 const Login = () => {
   const [formUser, setFormUser] = useState({ email: "", password: "" });
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { user, setUser } = useAuthUser();
+  const dispatch = useAppDispatch();
+  const [login, { isLoading: loading }] = useLoginMutation();
 
   useEffect(() => {
     document.title = "Login - 1MinuteQuiz";
@@ -23,38 +25,24 @@ const Login = () => {
   }, []);
 
 
-  const handleInput = (e) => {
+  const handleInput = (e: any) => {
     const { name, value } = e.target;
     setFormUser({ ...formUser, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ email: formUser.email, password: formUser.password }),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        setUser(data.user);
-        if (data.user.role === "user") {
-          navigate("/");
-        } else {
-          navigate("/adminDashboard");
-        }
+      const data = await login(formUser).unwrap();
+      dispatch(setUser(data.user));
+      if (data.user.role === "user") {
+        navigate("/");
       } else {
-        alert(data.message || "Login failed. Please check your credentials.");
+        navigate("/admin");
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error("Login error:", err);
-      alert("An error occurred. Please try again later.");
-    } finally {
-      setLoading(false);
+      alert(err?.data?.message || "Login failed. Please check your credentials.");
     }
   };
 

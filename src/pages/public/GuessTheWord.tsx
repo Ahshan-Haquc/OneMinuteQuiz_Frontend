@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import NavBar from "@/components/NavBar";
-import Footer from "@/components/Footer";
 import clock from "@/assets/icons/clock.png";
 import CharInputBox from "@/components/guessQuiz/CharInputBox";
 
@@ -10,16 +9,25 @@ const getRandomWord = () => WORDS[Math.floor(Math.random() * WORDS.length)];
 
 const GuessTheWord = () => {
   const [targetWord, setTargetWord] = useState(getRandomWord());
-  const [guesses, setGuesses] = useState([]);
-  const [currentGuess, setCurrentGuess] = useState(Array(5).fill(""));
-  const [placeholders, setPlaceholders] = useState([]);
+  const [guesses, setGuesses] = useState<string[][]>([]);
+  const [currentGuess, setCurrentGuess] = useState<string[]>(Array(5).fill(""));
+  const [placeholders, setPlaceholders] = useState<number[]>([]);
   const [isRunning, setIsRunning] = useState(false);
   const [timeLeft, setTimeLeft] = useState(60);
   const [attemptsLeft, setAttemptsLeft] = useState(5);
   const [showingResult, setShowingResult] = useState(false);
 
+  const setRandomPlaceholders = () => {
+    const placeholderSet = new Set<number>();
+    while (placeholderSet.size < 2) {
+      placeholderSet.add(Math.floor(Math.random() * 5));
+    }
+    setPlaceholders([...placeholderSet]);
+  };
+
   useEffect(() => {
     document.title = "Guess The Word";
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRandomPlaceholders();
   }, []);
 
@@ -38,13 +46,7 @@ const GuessTheWord = () => {
     return () => clearInterval(timer);
   }, [isRunning]);
 
-  const setRandomPlaceholders = () => {
-    const placeholderSet = new Set();
-    while (placeholderSet.size < 2) {
-      placeholderSet.add(Math.floor(Math.random() * 5));
-    }
-    setPlaceholders([...placeholderSet]);
-  };
+  // removing from here
 
   const handleStart = () => {
     setTargetWord(getRandomWord());
@@ -62,7 +64,7 @@ const GuessTheWord = () => {
     setShowingResult(true);
   };
 
-  const handleInputChange = (value, index) => {
+  const handleInputChange = (value: string, index: number) => {
     if (!/^[A-Za-z]?$/.test(value)) return;
 
     const updated = [...currentGuess];
@@ -76,7 +78,7 @@ const GuessTheWord = () => {
     }
   };
 
-  const findNextEditableIndex = (startIdx) => {
+  const findNextEditableIndex = (startIdx: number) => {
     for (let i = startIdx; i < 5; i++) {
       if (!placeholders.includes(i)) return i;
     }
@@ -173,6 +175,8 @@ const GuessTheWord = () => {
                     value={char}
                     index={i}
                     isDisabled={true}
+                    onChange={() => {}}
+                    autoFocus={false}
                   />
                 ))}
               </div>
