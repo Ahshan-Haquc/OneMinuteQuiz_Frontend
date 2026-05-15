@@ -5,12 +5,7 @@ import { router } from "@/routes/routes";
 
 import "./App.css";
 
-// A wrapper to handle initial auth check
-import { useGetMeQuery } from "@/redux/api/endpoints/authApi";
-
 function AuthLoader({ children }: { children: React.ReactNode }) {
-  const { isLoading } = useGetMeQuery();
-  if (isLoading) return <div>Loading...</div>;
   return <>{children}</>;
 }
 

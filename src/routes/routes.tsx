@@ -19,6 +19,7 @@ import AdminManageFeedback from "@/pages/admin/AdminManageFeedback";
 import ManageGuessTheWord from "@/pages/admin/ManageGuessTheWord";
 import ManageQuickCalculate from "@/pages/admin/ManageQuickCalculate";
 import MemoryFlashQuiz from "@/pages/public/quiz/MoneyFlash";
+import TargetClicker from "@/pages/public/quiz/TargetClicker";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
       {
         path: "moneyFlash",
         element: <MemoryFlashQuiz />,
+      },
+      {
+        path: "targetClicker",
+        element: <TargetClicker />,
       },
       {
         path: "feedback",

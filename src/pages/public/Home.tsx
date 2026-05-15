@@ -5,12 +5,15 @@ import { useAppSelector } from "@/redux/hooks";
 const QuizButton = ({
   to,
   text,
+  bg,
+  
 }: {
   to: string;
   text: string;
+  bg: string;
 }) => {
   return (
-    <div className="h-[150px]  md:h-[250px] bg-[#088395] text-[#EBF4F6] border border-white/20 dark:border-transparent rounded-md center flex-col gap-4 baloo-bhai hover:scale-95 transition-all duration-300">
+    <div className={`h-[150px]  md:h-[250px] ${bg} text-[#EBF4F6]  rounded-md center flex-col gap-4 baloo-bhai hover:scale-95 transition-all duration-300`}>
       <div className="text-3xl md:text-5xl">{text}</div>
       <NavLink
         to={to}
@@ -40,13 +43,15 @@ const Home = () => {
           </div>
         </div>
         {/* button part  */}
-        <div className="w-full px-3 grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-3">
+        <div className="w-full max-w-7xl mx-auto px-3 grid grid-cols-1 md:grid-cols-2 gap-3">
           {/* button 1 */}
-          <QuizButton to="/quickCalculate" text="Quick Calculate" />
+          <QuizButton to="/quickCalculate" text="Quick Calculate" bg="bg-red-900"/>
           {/* button 2 */}
-          <QuizButton to="/guessTheWord" text="Quess The Word" />
+          <QuizButton to="/guessTheWord" text="Quess The Word" bg="bg-blue-900"/>
           {/* button 3 */}
-          <QuizButton to="/moneyFlash" text="Money Flash" />
+          <QuizButton to="/moneyFlash" text="Money Flash" bg="bg-purple-900"/>
+          {/* button 4 */}
+          <QuizButton to="/targetClicker" text="Target Clicker" bg="bg-amber-900"/>
         </div>
       </div>
     </div>

@@ -155,7 +155,7 @@ const GuessTheWord = () => {
   const isGameOver = gameStatus === "won" || gameStatus === "lost";
 
   return (
-    <div className="w-full min-h-screen pb-10 bg-white text-black dark:bg-[#040c24]">
+    <div className="w-full min-h-screen pb-10 flex flex-col text-black dark:bg-[#040c24]">
       <NavBar pageName="Guess The Word" />
 
       {/* Result Popup */}
@@ -214,19 +214,19 @@ const GuessTheWord = () => {
       )}
 
       {/* Main Content */}
-      <div className="w-full flex flex-col items-center mt-12 md:mt-[80px] px-4">
+      <div className="w-full grow flex flex-col items-center justify-center mt-12 md:mt-[80px] px-4">
 
         {/* Level Selection Screen */}
         {gameStatus === "idle" && (
           <div className="flex flex-col items-center gap-8">
-            <h1 className="text-3xl md:text-4xl font-bold baloo-bhai text-gray-800 dark:text-white text-center">
+            <h1 className="text-3xl md:text-4xl 2xl:text-6xl font-bold baloo-bhai text-white dark:text-white text-center">
               Guess The Word
             </h1>
-            <p className="text-gray-500 dark:text-gray-300 text-center max-w-md">
+            <p className="text-gray-200 dark:text-gray-300 text-center max-w-4xl">
               Some letters are hidden. Fill in the blanks — correct letters get revealed each round!
             </p>
 
-            <h2 className="text-xl font-semibold text-gray-700 dark:text-white baloo-bhai">
+            <h2 className="text-xl font-semibold text-gray-400 dark:text-white baloo-bhai">
               Select Difficulty
             </h2>
 
@@ -238,7 +238,7 @@ const GuessTheWord = () => {
                     key={lvl}
                     onClick={() => setLevel(lvl)}
                     className={`
-                      w-40 py-4 rounded-2xl border-2 font-semibold transition-all duration-200
+                      w-40 md:w-80 py-4 lg:py-10 rounded-2xl border-2 font-semibold transition-all duration-200
                       ${meta.bg} ${meta.color}
                       ${level === lvl ? "scale-105 shadow-lg border-current" : "opacity-60 hover:opacity-90"}
                     `}
@@ -255,7 +255,7 @@ const GuessTheWord = () => {
 
             <button
               onClick={handleStart}
-              className="px-10 py-3 bg-[#088395] hover:bg-[#066574] text-white rounded-xl text-xl baloo-bhai transition-all duration-200 hover:scale-105 shadow-md"
+              className="px-10 py-3 border border-white dark:border-transparent bg-[#088395] hover:bg-[#066574] text-white rounded-xl text-xl baloo-bhai transition-all duration-200 hover:scale-105 shadow-md"
             >
               Start Game
             </button>
@@ -264,10 +264,10 @@ const GuessTheWord = () => {
 
         {/* Active Game */}
         {gameStatus === "playing" && (
-          <div className="flex flex-col md:flex-row gap-12 md:gap-20 w-full justify-center items-start">
+          <div className="flex flex-col md:flex-row gap-12 md:gap-20 h-full w-full justify-center items-center">
 
             {/* Left — board */}
-            <div className="h-fit min-w-[300px] md:min-w-[520px] max-w-fit p-6 border border-gray-400 dark:border-gray-600 rounded-2xl">
+            <div className="h-fit min-w-[300px] md:min-w-[520px] max-w-fit p-6 bg-white border border-gray-400 dark:border-gray-600 rounded-2xl">
 
               {/* Timer */}
               <div className="flex justify-center items-center gap-3 text-[#088395] text-5xl md:text-6xl baloo-bhai">
@@ -322,10 +322,10 @@ const GuessTheWord = () => {
             </div>
 
             {/* Right — controls */}
-            <div className="text-gray-700 dark:text-white flex flex-col items-center gap-2 mt-4 md:mt-8">
+            <div className="text-white dark:text-white flex flex-col items-center gap-2 ">
 
               <p className="text-xl">Attempts Left</p>
-              <p className="text-5xl font-bold text-[#088395]">{attemptsLeft}</p>
+              <p className="text-5xl font-bold text-white dark:text-[#088395]">{attemptsLeft}</p>
 
               <p className="text-base opacity-60 capitalize mt-1">Level: {level}</p>
 
