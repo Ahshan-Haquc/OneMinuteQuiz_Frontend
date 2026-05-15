@@ -152,7 +152,7 @@ const MemoryFlashQuiz = () => {
     const handleEndGame = () => {
         setStatus("ended");
         setTimeLeft(0);
-        
+
     };
 
     const handleInputChange = (value: string, index: number) => {
@@ -184,7 +184,7 @@ const MemoryFlashQuiz = () => {
 
     return (
         <div
-            className="w-full min-h-screen pb-16 bg-white text-black dark:bg-[#071952]"
+            className="w-full min-h-screen pb-16 bg-white text-black dark:bg-[#040c24]"
             onKeyDown={(e) => { if (e.key === "Enter") handleSubmit(); }}
             tabIndex={-1}
         >
@@ -265,8 +265,8 @@ const MemoryFlashQuiz = () => {
                                         key={id}
                                         onClick={() => setMode(id)}
                                         className={`py-4 px-4 rounded-2xl border-2 font-semibold text-left transition-all duration-200 ${mode === id
-                                                ? "bg-[#088395] border-[#088395] text-white scale-[1.03] shadow-lg"
-                                                : "border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:border-[#088395]"
+                                            ? "bg-[#088395] border-[#088395] text-white scale-[1.03] shadow-lg"
+                                            : "border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:border-[#088395]"
                                             }`}
                                     >
                                         <span className="block text-base leading-tight">{label}</span>
@@ -352,8 +352,8 @@ const MemoryFlashQuiz = () => {
                         {/* ── Feedback flash ───────────────────────────────────────────── */}
                         <div className={`h-9 flex items-center justify-center transition-all duration-200 ${feedback ? "opacity-100" : "opacity-0"}`}>
                             <div className={`px-5 py-1 rounded-full text-base font-semibold ${feedback === "correct"
-                                    ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
-                                    : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
+                                ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                                : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
                                 }`}>
                                 {feedback === "correct" ? "Correct!" : "Wrong!"}
                             </div>
@@ -412,8 +412,8 @@ const MemoryFlashQuiz = () => {
                             {status === "input" && (
                                 <>
                                     <p className={`text-xs font-semibold uppercase tracking-widest ${reversed
-                                            ? "text-orange-400"
-                                            : "text-gray-400 dark:text-gray-300"
+                                        ? "text-orange-400"
+                                        : "text-gray-400 dark:text-gray-300"
                                         }`}>
                                         {reversed ? "Type in REVERSE order!" : "Type the sequence!"}
                                     </p>
@@ -471,8 +471,8 @@ const MemoryFlashQuiz = () => {
                                                             onClick={() => handleColorPick(c)}
                                                             disabled={exhausted || feedback !== null}
                                                             className={`px-5 py-2.5 rounded-xl text-white text-sm font-bold transition-all ${exhausted
-                                                                    ? "opacity-30 cursor-not-allowed scale-95"
-                                                                    : "hover:scale-105 shadow active:scale-95"
+                                                                ? "opacity-30 cursor-not-allowed scale-95"
+                                                                : "hover:scale-105 shadow active:scale-95"
                                                                 }`}
                                                             style={{ backgroundColor: COLOR_HEX[c] }}
                                                         >

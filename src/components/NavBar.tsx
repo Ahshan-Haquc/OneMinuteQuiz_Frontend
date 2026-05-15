@@ -36,20 +36,18 @@ const NavBar = ({ pageName }: { pageName?: string }) => {
   };
 
   return (
-    <div className="h-16 w-full pt-3 pb-3 px-3 md:pt-6 md:px-6 flex justify-between items-center dark:bg-[#071952] z-101">
+    <div className="h-16 w-full pt-3 pb-3 px-3 md:pt-6 md:px-6 flex justify-between items-center dark:bg-[#040c24] z-101">
       {/* navBar right side part  */}
       <div
-        className={`${
-          pageName === "showHomePage" ? "flex" : "hidden"
-        } text-3xl md:text-5xl baloo-bhai text-[#088395] px-4 py-1 rounded`}
+        className={`${pageName === "showHomePage" ? "flex" : "hidden"
+          } text-3xl md:text-5xl baloo-bhai text-[#088395] px-4 py-1 rounded`}
       >
         1MinuteQuiz
       </div>
       <NavLink
         to="/"
-        className={`${
-          pageName !== "showHomePage" ? "flex" : "hidden"
-        } group h-9 w-9 md:h-12 md:w-12 p-3 rounded-full bg-[#088395] text-white duration-300 hover:bg-white hover:text-[#088395] flex items-center justify-center`}
+        className={`${pageName !== "showHomePage" ? "flex" : "hidden"
+          } group h-9 w-9 md:h-12 md:w-12 p-3 rounded-full bg-[#088395] text-white duration-300 hover:bg-white hover:text-[#088395] flex items-center justify-center`}
       >
         <img
           className="h-full w-full object-cover group-hover:invert-0 group-hover:brightness-100 invert brightness-0"
@@ -63,8 +61,7 @@ const NavBar = ({ pageName }: { pageName?: string }) => {
         <NavLink
           to={"/feedback"}
           className={({ isActive }) =>
-            `${
-              isActive ? "bg-[#071952]" : "bg-[#088395]"
+            `${isActive ? "bg-[#071952]" : "bg-[#088395]"
             } group h-9 w-9 md:h-12 md:w-12 p-2 rounded-full text-white duration-300 hover:bg-white hover:text-[#088395] flex items-center justify-center`
           }
         >
@@ -90,8 +87,7 @@ const NavBar = ({ pageName }: { pageName?: string }) => {
         <NavLink
           to="/quizInfo"
           className={({ isActive }) =>
-            `${
-              isActive ? "bg-[#071952]" : "bg-[#088395]"
+            `${isActive ? "bg-[#071952]" : "bg-[#088395]"
             } group h-9 w-9 md:h-12 md:w-12 p-2 rounded-full text-white duration-300 hover:bg-white hover:text-[#088395] flex items-center justify-center`
           }
         >

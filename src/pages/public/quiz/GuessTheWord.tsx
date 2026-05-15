@@ -38,12 +38,12 @@ const INITIAL_REVEALED: Record<Level, number> = {
 };
 
 const LEVEL_META: Record<Level, { label: string; letters: number; color: string; bg: string }> = {
-  easy:   { label: "Easy",   letters: 5, color: "text-green-700",  bg: "bg-green-100 border-green-400"  },
+  easy: { label: "Easy", letters: 5, color: "text-green-700", bg: "bg-green-100 border-green-400" },
   medium: { label: "Medium", letters: 7, color: "text-yellow-700", bg: "bg-yellow-100 border-yellow-400" },
-  hard:   { label: "Hard",   letters: 9, color: "text-red-700",    bg: "bg-red-100 border-red-400"      },
+  hard: { label: "Hard", letters: 9, color: "text-red-700", bg: "bg-red-100 border-red-400" },
 };
 
-const TIME_LIMIT   = 60;
+const TIME_LIMIT = 60;
 const MAX_ATTEMPTS = 5;
 
 // Helpers
@@ -60,14 +60,14 @@ const getInitialRevealedPositions = (wordLength: number, count: number): number[
 
 // Component
 const GuessTheWord = () => {
-  const [level,             setLevel]             = useState<Level>("easy");
-  const [targetWord,        setTargetWord]        = useState<string>("");
+  const [level, setLevel] = useState<Level>("easy");
+  const [targetWord, setTargetWord] = useState<string>("");
   const [revealedPositions, setRevealedPositions] = useState<number[]>([]);
-  const [currentGuess,      setCurrentGuess]      = useState<string[]>([]);
-  const [guessHistory,      setGuessHistory]      = useState<GuessRecord[]>([]);
-  const [gameStatus,        setGameStatus]        = useState<GameStatus>("idle");
-  const [timeLeft,          setTimeLeft]          = useState(TIME_LIMIT);
-  const [attemptsLeft,      setAttemptsLeft]      = useState(MAX_ATTEMPTS);
+  const [currentGuess, setCurrentGuess] = useState<string[]>([]);
+  const [guessHistory, setGuessHistory] = useState<GuessRecord[]>([]);
+  const [gameStatus, setGameStatus] = useState<GameStatus>("idle");
+  const [timeLeft, setTimeLeft] = useState(TIME_LIMIT);
+  const [attemptsLeft, setAttemptsLeft] = useState(MAX_ATTEMPTS);
 
   useEffect(() => { document.title = "Guess The Word"; }, []);
 
@@ -85,7 +85,7 @@ const GuessTheWord = () => {
 
   // Actions
   const handleStart = () => {
-    const word     = getRandomWord(level);
+    const word = getRandomWord(level);
     const revealed = getInitialRevealedPositions(word.length, INITIAL_REVEALED[level]);
     setTargetWord(word);
     setRevealedPositions(revealed);
@@ -155,7 +155,7 @@ const GuessTheWord = () => {
   const isGameOver = gameStatus === "won" || gameStatus === "lost";
 
   return (
-    <div className="w-full min-h-screen pb-10 bg-white text-black dark:bg-[#071952]">
+    <div className="w-full min-h-screen pb-10 bg-white text-black dark:bg-[#040c24]">
       <NavBar pageName="Guess The Word" />
 
       {/* Result Popup */}
@@ -189,11 +189,10 @@ const GuessTheWord = () => {
                       {record.guess.map((char, i) => (
                         <div
                           key={i}
-                          className={`w-9 h-9 flex items-center justify-center rounded font-bold text-sm border ${
-                            record.correct[i]
+                          className={`w-9 h-9 flex items-center justify-center rounded font-bold text-sm border ${record.correct[i]
                               ? "bg-green-600 border-green-400 text-white"
                               : "bg-red-700 border-red-500 text-white"
-                          }`}
+                            }`}
                         >
                           {char}
                         </div>
@@ -297,7 +296,7 @@ const GuessTheWord = () => {
                         value={char}
                         index={i}
                         isDisabled={true}
-                        onChange={() => {}}
+                        onChange={() => { }}
                         autoFocus={false}
                       />
                     ))}

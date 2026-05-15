@@ -2,6 +2,25 @@ import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import NavBar from "@/components/NavBar";
 import { useAppSelector } from "@/redux/hooks";
+const QuizButton = ({
+  to,
+  text,
+}: {
+  to: string;
+  text: string;
+}) => {
+  return (
+    <div className="h-[150px]  md:h-[250px] bg-[#088395] text-[#EBF4F6] border border-white/20 dark:border-transparent rounded-md center flex-col gap-4 baloo-bhai hover:scale-95 transition-all duration-300">
+      <div className="text-3xl md:text-5xl">{text}</div>
+      <NavLink
+        to={to}
+        className="h-9 md:h-12 w-[160px] bg-[#37B7C3] rounded-md center text-2xl md:text-4xl hover:bg-[#35aab4]"
+      >
+        Start
+      </NavLink>
+    </div>
+  );
+};
 const Home = () => {
   const { user } = useAppSelector((state) => state.auth);
   useEffect(() => {
@@ -10,9 +29,9 @@ const Home = () => {
   return (
     <div className="min-h-screen w-full flex flex-col">
       <NavBar pageName="showHomePage" />
-      <div className="pb-10  grow flex flex-col  gap-10 items-center justify-center dark:bg-[#071952]">
+      <div className="pb-10  grow flex flex-col  gap-10 items-center justify-center dark:bg-[#040c24]">
         {/* text part  */}
-        <div className="center flex-col text-[#37B7C3]">
+        <div className="center flex-col text-white dark:text-[#37B7C3]">
           <div className="text-3xl md:text-6xl center baloo-bhai">
             Welcome, {user?.name}
           </div>
@@ -21,27 +40,13 @@ const Home = () => {
           </div>
         </div>
         {/* button part  */}
-        <div className="center flex-col gap-3">
+        <div className="w-full px-3 grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-3">
           {/* button 1 */}
-          <div className="h-[150px] w-[300px] md:w-[600px] bg-[#088395] text-[#EBF4F6] rounded-md center flex-col gap-4 baloo-bhai">
-            <div className="text-3xl md:text-5xl">Quick Calculate</div>
-            <NavLink
-              to="/quickCalculate"
-              className="h-9 md:h-12 w-[160px] bg-[#37B7C3] rounded-md center text-2xl md:text-4xl hover:bg-[#35aab4]"
-            >
-              Start
-            </NavLink>
-          </div>
+          <QuizButton to="/quickCalculate" text="Quick Calculate" />
           {/* button 2 */}
-          <div className="h-[150px] w-[300px] md:w-[600px] bg-[#088395] text-[#EBF4F6] rounded-md center flex-col gap-4 baloo-bhai">
-            <div className="text-3xl md:text-5xl">Quess The Word</div>
-            <NavLink
-              to="/guessTheWord"
-              className="h-9 md:h-12 w-[160px] bg-[#37B7C3] rounded-md center text-2xl md:text-4xl hover:bg-[#35aab4]"
-            >
-              Start
-            </NavLink>
-          </div>
+          <QuizButton to="/guessTheWord" text="Quess The Word" />
+          {/* button 3 */}
+          <QuizButton to="/moneyFlash" text="Money Flash" />
         </div>
       </div>
     </div>

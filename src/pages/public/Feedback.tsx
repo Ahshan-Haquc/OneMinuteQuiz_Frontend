@@ -33,7 +33,7 @@ const Feedback = () => {
         feedbackText: feedbackText,
         rating: selectedRating,
       }).unwrap();
-      
+
       alert("Thanks for your feedback!!!");
       navigate("/");
     } catch (error) {
@@ -42,7 +42,7 @@ const Feedback = () => {
   };
 
   return (
-    <div className="h-full w-full flex flex-col dark:bg-[#071952]">
+    <div className="h-full w-full flex flex-col dark:bg-[#040c24]">
       <NavBar pageName="homePage" />
 
       <div className="p-10 flex flex-col flex-grow gap-10">

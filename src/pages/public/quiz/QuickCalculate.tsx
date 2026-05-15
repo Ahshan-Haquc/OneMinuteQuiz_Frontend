@@ -123,7 +123,7 @@ const QuickCalculate = () => {
     setShowingResult(false);
   };
 
-return (
+  return (
     <div className="min-h-screen w-full flex flex-col bg-white">
       {!isRunning ? (
         <NavBar pageName="showQuickCalculate" />
@@ -133,9 +133,9 @@ return (
         </div>
       )}
 
-      <div className="dark:bg-[#071952] flex flex-col md:flex-row grow gap-6 md:gap-12 items-center justify-center p-4">
+      <div className="dark:bg-[#040c24] flex flex-col md:flex-row grow gap-6 md:gap-12 items-center justify-center p-4">
         {/* Main Game Card */}
-        <div className="w-full max-w-[380px] md:max-w-[750px] bg-white p-4 md:p-6 border-2 border-[#7AB2B2] dark:bg-[#071952] rounded-3xl shadow-xl">
+        <div className="w-full max-w-[380px] md:max-w-[750px] bg-white p-4 md:p-6 border-2 border-[#7AB2B2] dark:bg-[#040c24] rounded-3xl shadow-xl">
           {/* Timer Header */}
           <div className="flex items-center mb-4 bg-[#EBF4F6] w-fit px-4 py-1 rounded-full border border-[#7AB2B2]">
             <img src={clock} alt="clock" className="h-5 w-5 md:h-8 md:w-8" />
@@ -183,12 +183,12 @@ return (
           <div className="text-3xl md:text-4xl baloo-bhai text-[#09637E] dark:text-white hidden md:block">
             Live Stats
           </div>
-          
+
           <div className="grid grid-cols-3 md:grid-cols-1 gap-4 w-full">
-             <HighestScore />
-             <StatCard label="Total" value={scoreBoard.totalAttempt} color="text-[#09637E]" />
-             <StatCard label="Wrong" value={scoreBoard.wrongAnswer} color="text-red-500" />
-             <StatCard label="Correct" value={scoreBoard.correctAnswer} color="text-green-600" />
+            <HighestScore />
+            <StatCard label="Total" value={scoreBoard.totalAttempt} color="text-[#09637E]" />
+            <StatCard label="Wrong" value={scoreBoard.wrongAnswer} color="text-red-500" />
+            <StatCard label="Correct" value={scoreBoard.correctAnswer} color="text-green-600" />
           </div>
 
           {!isRunning ? (
