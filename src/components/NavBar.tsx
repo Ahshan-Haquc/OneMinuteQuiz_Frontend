@@ -5,10 +5,10 @@ import darkmode from "../assets/icons/darkmode.png";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { toggleDarkMode } from "@/redux/features/ui/uiSlice";
 import { useLogoutMutation } from "@/redux/api/endpoints/authApi";
-import home from "../assets/icons/home.png";
 import info from "../assets/icons/info.png";
 import logoutIcon from "../assets/icons/logout.png";
 import feedback from "../assets/icons/rate.png";
+import { ChevronLeft } from "lucide-react";
 
 const NavBar = ({ pageName }: { pageName?: string }) => {
   const navigate = useNavigate();
@@ -40,21 +40,22 @@ const NavBar = ({ pageName }: { pageName?: string }) => {
       {/* navBar right side part  */}
       <div
         className={`${pageName === "showHomePage" ? "flex" : "hidden"
-          } text-3xl md:text-5xl baloo-bhai text-[#088395] px-4 py-1 rounded`}
+          } text-3xl md:text-5xl baloo-bhai text-[#02adc7] px-4 py-1 rounded cursor-default`}
       >
         1MinuteQuiz
       </div>
-      <NavLink
-        to="/"
+      <button
+        onClick={() => navigate(-1)}
         className={`${pageName !== "showHomePage" ? "flex" : "hidden"
-          } group h-9 w-9 md:h-12 md:w-12 p-3 rounded-full bg-[#088395] text-white duration-300 hover:bg-white hover:text-[#088395] flex items-center justify-center`}
+          } group h-9 w-9 md:h-12 md:w-12 p-3 rounded-full bg-[#088395] text-white duration-300  flex items-center justify-center`}
       >
-        <img
+        {/* <img
           className="h-full w-full object-cover group-hover:invert-0 group-hover:brightness-100 invert brightness-0"
           src={home}
           alt="home"
-        />
-      </NavLink>
+        /> */}
+        <ChevronLeft className="text-white group-hover:scale-110 duration-300" />
+      </button>
 
       {/* navBar left side part - icons */}
       <div className="flex gap-2 md:gap-4">
@@ -75,7 +76,7 @@ const NavBar = ({ pageName }: { pageName?: string }) => {
         {/* Dark Mode Toggle Button */}
         <button
           onClick={() => dispatch(toggleDarkMode())}
-          className="group h-9 w-9 md:h-12 md:w-12 p-2 rounded-full bg-[#088395] text-white duration-300 hover:bg-white hover:text-[#088395] flex items-center justify-center"
+          className={`group h-9 w-9 md:h-12 md:w-12 p-2 rounded-full  text-white duration-300 hover:bg-white hover:text-[#088395] flex items-center justify-center`}
         >
           <img
             className="h-full w-full object-cover group-hover:invert-0 group-hover:brightness-100 invert brightness-0"
