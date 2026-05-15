@@ -5,8 +5,8 @@ import AdminRoute from "@/components/routes/AdminRoute";
 import NotFound from "@/pages/public/NotFound";
 
 import Home from "@/pages/public/Home";
-import GuessTheWord from "@/pages/public/GuessTheWord";
-import QuickCalculate from "@/pages/public/QuickCalculate";
+import GuessTheWord from "@/pages/public/quiz/GuessTheWord";
+import QuickCalculate from "@/pages/public/quiz/QuickCalculate";
 import Feedback from "@/pages/public/Feedback";
 import QuizInfo from "@/pages/public/QuizInfo";
 
@@ -18,6 +18,7 @@ import AdminManageUsers from "@/pages/admin/AdminManageUsers";
 import AdminManageFeedback from "@/pages/admin/AdminManageFeedback";
 import ManageGuessTheWord from "@/pages/admin/ManageGuessTheWord";
 import ManageQuickCalculate from "@/pages/admin/ManageQuickCalculate";
+import MemoryFlashQuiz from "@/pages/public/quiz/MoneyFlash";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
         path: "quickCalculate",
         element: <QuickCalculate />,
+      },
+      {
+        path: "moneyFlash",
+        element: <MemoryFlashQuiz />,
       },
       {
         path: "feedback",
