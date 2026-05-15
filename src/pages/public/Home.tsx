@@ -22,7 +22,8 @@ const QuizButton = ({
       className={`h-[170px] md:h-[260px] w-full ${bg} text-[#EBF4F6] rounded-2xl flex flex-col justify-between p-4 md:p-6 baloo-bhai shadow-lg hover:scale-[0.98] transition-all duration-300 relative overflow-hidden group`}
     >
       {/* Decorative background element for game theme vibe */}
-      <div className="absolute -right-6 -top-6 w-24 h-24 bg-white/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-500" />
+      <div className="absolute -right-6 -top-6 w-24 h-24 bg-white/15 rounded-full blur-xl group-hover:scale-150 transition-transform duration-500" />
+      <div className="absolute -left-6 -top-6 w-24 h-24 bg-white/15 rounded-full blur-xl group-hover:scale-150 transition-transform duration-500" />
 
       {/* Title */}
       <div className="text-2xl md:text-5xl text-center font-bold tracking-wide drop-shadow-sm mt-2">
