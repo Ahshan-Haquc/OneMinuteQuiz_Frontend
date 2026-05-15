@@ -5,7 +5,7 @@ const QuizInfo = () => {
   const [toggleDiv, setToggleDiv] = useState(false);
 
   return (
-    <div className="h-full w-full flex flex-col bg-[#f0f8fa] text-[#1e293b] dark:bg-[#071952] dark:text-white">
+    <div className="min-h-screen w-full flex flex-col justify-center items-center  text-[#1e293b] dark:bg-[#071952] dark:text-white">
       <NavBar pageName="quizInformation" />
 
       <div className="flex-grow  px-4 md:px-16 flex flex-col items-center justify-center gap-4">
