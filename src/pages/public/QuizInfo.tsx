@@ -5,7 +5,7 @@ const QuizInfo = () => {
   const [toggleDiv, setToggleDiv] = useState(false);
 
   return (
-    <div className="h-full w-full flex flex-col bg-[#f0f8fa] text-[#1e293b] dark:bg-[#071952] dark:text-white">
+    <div className="min-h-screen w-full flex flex-col justify-center items-center  text-[#1e293b] dark:bg-[#040c24] dark:text-white">
       <NavBar pageName="quizInformation" />
 
       <div className="flex-grow  px-4 md:px-16 flex flex-col items-center justify-center gap-4">
@@ -14,8 +14,7 @@ const QuizInfo = () => {
           <button
             onClick={() => setToggleDiv(false)}
             className={`px-6 py-2 rounded-lg font-semibold shadow-md text-white transition duration-200 
-              ${
-                !toggleDiv ? "bg-[#0369a1]" : "bg-gray-400 hover:bg-[#0369a1]"
+              ${!toggleDiv ? "bg-[#0369a1]" : "bg-gray-400 hover:bg-[#0369a1]"
               }`}
           >
             Quick Calculate
