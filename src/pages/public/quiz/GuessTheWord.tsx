@@ -214,7 +214,7 @@ const GuessTheWord = () => {
       )}
 
       {/* Main Content */}
-      <div className="w-full grow flex flex-col items-center justify-center mt-12 md:mt-[80px] px-4">
+      <div className="w-full grow flex flex-col items-center justify-center mt-12 md:mt-0 px-4">
 
         {/* Level Selection Screen */}
         {gameStatus === "idle" && (
