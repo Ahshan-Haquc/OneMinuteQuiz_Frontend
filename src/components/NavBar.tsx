@@ -88,7 +88,7 @@ const NavBar = ({ pageName }: { pageName?: string }) => {
         <NavLink
           to="/quizInfo"
           className={({ isActive }) =>
-            `${isActive ? "bg-[#071952]" : "bg-[#088395]"
+            `${isActive ? "bg-[#071952]" : "bg-[#088395] dark:bg-transparent"
             } group h-9 w-9 md:h-12 md:w-12 p-2 rounded-full text-white duration-300 hover:bg-white hover:text-[#088395] flex items-center justify-center`
           }
         >
@@ -100,7 +100,7 @@ const NavBar = ({ pageName }: { pageName?: string }) => {
         </NavLink>
 
         <div
-          className="group h-9 w-9 md:h-12 md:w-12 p-2 md:p-3 rounded-full bg-[#088395] duration-300 hover:bg-white flex items-center justify-center"
+          className="group h-9 w-9 md:h-12 md:w-12 p-2 md:p-3 rounded-full bg-[#088395] dark:bg-transparent duration-300 hover:bg-white flex items-center justify-center"
           onClick={performLogout}
         >
           <img

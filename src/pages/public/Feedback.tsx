@@ -52,11 +52,11 @@ const Feedback = () => {
         </div>
 
         {/* Main Feedback Form Card */}
-        <div className="bg-white dark:bg-white/5 rounded-3xl p-6 md:p-8 shadow-xl border border-[#7AB2B2]/30 flex flex-col gap-6">
+        <div className=" dark:bg-white/5 rounded-3xl p-6 md:p-8 shadow-xl border border-[#7AB2B2]/30 flex flex-col gap-6">
           
           {/* Tactile Interactive Star Selection */}
           <div className="flex flex-col gap-2">
-            <label className="text-base md:text-xl font-bold baloo-bhai  text-[#088395]">
+            <label className="text-base md:text-xl font-bold baloo-bhai text-white dark:text-[#088395]">
               Rate your experience:
             </label>
             <div className="flex items-center gap-2 bg-[#EBF4F6]/50 dark:bg-transparent p-3 rounded-2xl w-fit border border-[#7AB2B2]/20">
@@ -87,7 +87,7 @@ const Feedback = () => {
 
           {/* Upgraded Multi-line Input Field Container */}
           <div className="flex flex-col gap-2">
-            <label className="text-base md:text-xl font-bold baloo-bhai  text-[#088395]">
+            <label className="text-base md:text-xl font-bold baloo-bhai text-white dark:text-[#088395]">
               Your Comments:
             </label>
             <div className="w-full bg-[#EBF4F6]/30 dark:bg-transparent border-2 border-[#7AB2B2]/40 focus-within:border-[#088395] rounded-2xl p-4 transition-all shadow-inner">
@@ -96,7 +96,7 @@ const Feedback = () => {
                 rows={4}
                 value={feedbackText}
                 onChange={(e) => setFeedbackText(e.target.value)}
-                className="w-full bg-transparent text-sm md:text-lg text-[#088395] dark:text-white focus:outline-none resize-none font-medium leading-relaxed placeholder-[#7AB2B2]/60 dark:placeholder-white/30"
+                className="w-full bg-transparent text-sm md:text-lg text-[#088395] dark:text-white focus:outline-none resize-none font-medium leading-relaxed placeholder-[#7AB2B2] dark:placeholder-white/30"
               />
             </div>
           </div>
