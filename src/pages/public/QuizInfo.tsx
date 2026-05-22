@@ -1,5 +1,5 @@
 import NavBar from "@/components/NavBar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type QuizType =
   | "quickCalculate"
@@ -12,37 +12,17 @@ interface QuizInfoProps {
 }
 
 const QuizInfo = ({
-  defaultQuiz = "quickCalculate",
+  defaultQuiz = "guessTheWord",
 }: QuizInfoProps) => {
   const [selectedQuiz, setSelectedQuiz] =
     useState<QuizType>(defaultQuiz);
 
+  // Updated purely to align styling constants with your brand identity colors
   const quizData = {
-    quickCalculate: {
-      title: "Quick Calculate Quiz",
-      color: "#0369a1",
-      gradient:
-        "from-cyan-500 via-sky-500 to-blue-600",
-      intro:
-        "Test your math speed! Quick Calculate challenges you with fast-paced arithmetic questions where every second counts.",
-      howToPlay:
-        "You’ll be shown arithmetic problems like addition, subtraction, or multiplication. Use the number buttons to answer quickly before time runs out.",
-      rules: [
-        "You must answer before the timer ends.",
-        "Each correct answer increases your score.",
-        "Wrong answers are counted separately.",
-        "The game lasts 1 minute.",
-      ],
-      goal:
-        "Score as many correct answers as possible within 60 seconds.",
-      icon: "🧮",
-    },
-
     guessTheWord: {
       title: "Guess The Word Quiz",
-      color: "#7c3aed",
-      gradient:
-        "from-violet-500 via-purple-500 to-fuchsia-600",
+      color: "#088395",
+      bgClass: "bg-[#088395]",
       intro:
         "Boost your vocabulary and thinking speed! Guess hidden words using partially revealed letters.",
       howToPlay:
@@ -55,14 +35,28 @@ const QuizInfo = ({
       ],
       goal:
         "Guess as many words as possible before time ends.",
-      icon: "🔤",
     },
-
+        quickCalculate: {
+      title: "Quick Calculate Quiz",
+      color: "#09637E",
+      bgClass: "bg-[#09637E]",
+      intro:
+        "Test your math speed! Quick Calculate challenges you with fast-paced arithmetic questions where every second counts.",
+      howToPlay:
+        "You’ll be shown arithmetic problems like addition, subtraction, or multiplication. Use the number buttons to answer quickly before time runs out.",
+      rules: [
+        "You must answer before the timer ends.",
+        "Each correct answer increases your score.",
+        "Wrong answers are counted separately.",
+        "The game lasts 1 minute.",
+      ],
+      goal:
+        "Score as many correct answers as possible within 60 seconds.",
+    },
     memoryFlashQuiz: {
       title: "Memory Flash Quiz",
-      color: "#e11d48",
-      gradient:
-        "from-rose-500 via-pink-500 to-red-500",
+      color: "#09637E",
+      bgClass: "bg-[#7AB2B2]",
       intro:
         "Challenge your memory power! Memorize sequences shown on screen and type them correctly before they disappear.",
       howToPlay:
@@ -75,14 +69,12 @@ const QuizInfo = ({
       ],
       goal:
         "Remember and type as many correct sequences as possible.",
-      icon: "🧠",
     },
 
     targetClickSpeed: {
       title: "Target Click Speed Game",
-      color: "#ea580c",
-      gradient:
-        "from-orange-500 via-amber-500 to-yellow-500",
+      color: "#09637E",
+      bgClass: "bg-[#09637E]",
       intro:
         "Test your reaction speed and mouse accuracy by clicking moving targets as fast as possible.",
       howToPlay:
@@ -95,168 +87,140 @@ const QuizInfo = ({
       ],
       goal:
         "Click as many targets as possible before time runs out.",
-      icon: "🎯",
     },
   };
 
   const currentQuiz = quizData[selectedQuiz];
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center dark:bg-[#040c24] text-[#1e293b] dark:text-white overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center dark:bg-[#040c24] text-white  w-full overflow-x-hidden">
       <NavBar pageName="quizInformation" />
 
-      {/* Background Glow */}
-      <div className="fixed inset-0 overflow-hidden -z-10">
-        <div className="absolute top-[-150px] left-[-100px] h-[350px] w-[350px] rounded-full bg-cyan-500/20 blur-3xl"></div>
-
-        <div className="absolute bottom-[-150px] right-[-100px] h-[350px] w-[350px] rounded-full bg-purple-500/20 blur-3xl"></div>
+      {/* Brand-consistent Ambient Background Glow */}
+      <div className="fixed inset-0 overflow-hidden -z-10 pointer-events-none">
+        <div className="absolute top-[-10px] left-[-50px] h-[300px] w-[300px] rounded-full bg-[#088395]/15 blur-3xl"></div>
+        <div className="absolute bottom-[50px] right-[-50px] h-[350px] w-[350px] rounded-full bg-[#7AB2B2]/20 blur-3xl"></div>
       </div>
 
-      <div className="w-full flex-grow px-4 md:px-10 py-10 flex flex-col items-center gap-8">
-        {/* Heading */}
+      <div className="w-full flex-grow py-8 px-4 md:py-12 flex flex-col items-center gap-8 max-w-7xl overflow-hidden">
+        {/* Page Title */}
         <div className="text-center">
-          <h1 className="text-4xl md:text-6xl baloo-bhai bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-6xl baloo-bhai text-gray-100 dark:text-[#09637E] drop-shadow-xs">
             Quiz Information
           </h1>
-
-          <p className="mt-3 text-gray-500 dark:text-gray-300 text-lg md:text-xl">
-            Learn the rules and gameplay before starting.
+          <p className="mt-2 text-[#088395] text-base md:text-xl font-medium max-w-md mx-auto">
+            Learn the rules and gameplay mechanics before diving into the action.
           </p>
         </div>
 
-        {/* Buttons */}
-        <div className="flex flex-wrap justify-center gap-4">
-          {Object.entries(quizData).map(([key, value]) => (
-            <button
-              key={key}
-              onClick={() =>
-                setSelectedQuiz(key as QuizType)
-              }
-              className={`px-5 md:px-7 py-3 rounded-2xl text-white font-semibold shadow-lg transition-all duration-300 hover:scale-105 active:scale-95
-              
-              ${
-                selectedQuiz === key
-                  ? `bg-gradient-to-r ${value.gradient}`
-                  : "bg-gray-500 hover:bg-gray-600"
-              }`}
-            >
-              <span className="mr-2">{value.icon}</span>
-              {value.title}
-            </button>
-          ))}
+        {/* Dynamic Navigation Buttons */}
+        <div className="flex flex-wrap justify-center gap-2 md:gap-4 w-full px-2">
+          {Object.entries(quizData).map(([key, value]) => {
+            const isSelected = selectedQuiz === key;
+            return (
+              <button
+                key={key}
+                onClick={() => setSelectedQuiz(key as QuizType)}
+                className={`px-4 md:px-6 py-2.5 md:py-3.5 rounded-xl md:rounded-2xl text-sm md:text-base font-bold shadow-sm transition-all duration-200 hover:scale-[1.02] active:scale-95 flex-grow sm:flex-grow-0 text-center
+                ${
+                  isSelected
+                    ? `${value.bgClass} text-white shadow-[#088395]/20 ring-2 ring-white`
+                    : " text-white border border-[#7AB2B2]/40 hover:bg-[#EBF4F6] hover:text-[#088395]"
+                }`}
+              >
+                {value.title}
+              </button>
+            );
+          })}
         </div>
 
-        {/* Main Card */}
-        <div className="w-full max-w-5xl relative">
-          {/* Glow */}
-          <div
-            className="absolute -inset-1 rounded-3xl blur opacity-30"
-            style={{
-              background: `linear-gradient(to right, ${currentQuiz.color}, #ffffff)`,
-            }}
-          ></div>
+        {/* Main Content Display Card */}
+        <div className="w-full relative px-1 md:px-0">
+          {/* Subtle Outer Card Glow */}
+          <div className="absolute -inset-0.5 rounded-3xl blur-md opacity-25 bg-[#088395]"></div>
 
-          {/* Card */}
-          <div className="relative bg-white/90 dark:bg-[#0b1736]/90 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 p-6 md:p-10 overflow-hidden">
+          {/* Core Content Container */}
+          <div className="relative  rounded-3xl shadow-xl border border-[#7AB2B2]/30 p-5 md:p-10 overflow-hidden">
             
-            {/* Decorative */}
-            <div
-              className="absolute top-0 right-0 h-40 w-40 rounded-full blur-3xl opacity-20"
-              style={{
-                backgroundColor: currentQuiz.color,
-              }}
-            ></div>
+            {/* Visual Decorative Accent */}
+            <div className="absolute -top-12 -right-12 h-32 w-32 rounded-full bg-[#EBF4F6] -z-0 opacity-60"></div>
 
-            {/* Title */}
-            <div className="flex items-center justify-center gap-4 mb-8">
-              <div className="text-5xl md:text-6xl">
-                {currentQuiz.icon}
-              </div>
-
+            {/* Selected Quiz Headline */}
+            <div className="flex items-center justify-center mb-8 relative z-10">
               <h2
-                className="text-3xl md:text-5xl baloo-bhai text-center"
+                className="text-2xl md:text-4xl font-extrabold tracking-wide text-center uppercase border-b-4 pb-2 px-4 rounded-b-sm"
                 style={{
-                  color: currentQuiz.color,
+                  borderColor: currentQuiz.color,
                 }}
               >
                 {currentQuiz.title}
               </h2>
             </div>
 
-            {/* Content */}
-            <div className="space-y-6 text-lg md:text-xl leading-relaxed">
-              {/* Introduction */}
-              <div className="bg-gray-100/70 dark:bg-[#111c3d] p-5 rounded-2xl">
+            {/* Structured Info Blocks */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-3 text-sm md:text-base text-gray-700">
+              
+              {/* Introduction Card */}
+              <div className="bg-[#EBF4F6]/60 border border-[#7AB2B2]/20 p-5 rounded-2xl flex flex-col transition-all hover:bg-white hover:shadow-sm">
                 <h3
-                  className="text-2xl font-bold mb-3"
-                  style={{
-                    color: currentQuiz.color,
-                  }}
+                  className="text-lg md:text-xl font-bold mb-2 flex items-center gap-2"
+                  style={{ color: currentQuiz.color }}
                 >
+                  <span className="w-1.5 h-4 rounded-sm bg-current inline-block"></span>
                   Introduction
                 </h3>
-
-                <p>{currentQuiz.intro}</p>
+                <p className="font-medium leading-relaxed text-gray-600">{currentQuiz.intro}</p>
               </div>
 
-              {/* How to Play */}
-              <div className="bg-gray-100/70 dark:bg-[#111c3d] p-5 rounded-2xl">
+              {/* How to Play Card */}
+              <div className="bg-[#EBF4F6]/60 border border-[#7AB2B2]/20 p-5 rounded-2xl flex flex-col transition-all hover:bg-white hover:shadow-sm">
                 <h3
-                  className="text-2xl font-bold mb-3"
-                  style={{
-                    color: currentQuiz.color,
-                  }}
+                  className="text-lg md:text-xl font-bold mb-2 flex items-center gap-2"
+                  style={{ color: currentQuiz.color }}
                 >
+                  <span className="w-1.5 h-4 rounded-sm bg-current inline-block"></span>
                   How To Play
                 </h3>
-
-                <p>{currentQuiz.howToPlay}</p>
+                <p className="font-medium leading-relaxed text-gray-600">{currentQuiz.howToPlay}</p>
               </div>
 
-              {/* Rules */}
-              <div className="bg-gray-100/70 dark:bg-[#111c3d] p-5 rounded-2xl">
+              {/* Rules Card */}
+              <div className="bg-[#EBF4F6]/60 border border-[#7AB2B2]/20 p-5 rounded-2xl md:col-span-2 flex flex-col transition-all hover:bg-white hover:shadow-sm">
                 <h3
-                  className="text-2xl font-bold mb-3"
-                  style={{
-                    color: currentQuiz.color,
-                  }}
+                  className="text-lg md:text-xl font-bold mb-3 flex items-center gap-2"
+                  style={{ color: currentQuiz.color }}
                 >
+                  <span className="w-1.5 h-4 rounded-sm bg-current inline-block"></span>
                   Rules
                 </h3>
-
-                <ul className="space-y-2">
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {currentQuiz.rules.map((rule, index) => (
                     <li
                       key={index}
-                      className="flex items-start gap-3"
+                      className="flex items-start gap-2.5 font-medium text-gray-600"
                     >
                       <span
-                        className="mt-1 h-3 w-3 rounded-full"
-                        style={{
-                          backgroundColor:
-                            currentQuiz.color,
-                        }}
+                        className="mt-1.5 h-2 w-2 rounded-full shrink-0"
+                        style={{ backgroundColor: currentQuiz.color }}
                       ></span>
-
-                      {rule}
+                      <span>{rule}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              {/* Goal */}
-              <div className="bg-gray-100/70 dark:bg-[#111c3d] p-5 rounded-2xl">
+              {/* Goal Card */}
+              <div className="bg-[#EBF4F6]/60 border border-[#7AB2B2]/20 p-5 rounded-2xl md:col-span-2 flex flex-col transition-all hover:bg-white hover:shadow-sm">
                 <h3
-                  className="text-2xl font-bold mb-3"
-                  style={{
-                    color: currentQuiz.color,
-                  }}
+                  className="text-lg md:text-xl font-bold mb-2 flex items-center gap-2"
+                  style={{ color: currentQuiz.color }}
                 >
+                  <span className="w-1.5 h-4 rounded-sm bg-current inline-block"></span>
                   Goal
                 </h3>
-
-                <p>{currentQuiz.goal}</p>
+                <p className="font-medium leading-relaxed text-gray-600">{currentQuiz.goal}</p>
               </div>
+
             </div>
           </div>
         </div>
