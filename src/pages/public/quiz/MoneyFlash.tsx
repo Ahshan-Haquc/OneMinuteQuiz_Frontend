@@ -184,7 +184,7 @@ const MemoryFlashQuiz = () => {
 
     return (
         <div
-            className="w-full min-h-screen pb-16 bg-white text-black dark:bg-[#040c24]"
+            className="w-full min-h-screen pb-16  text-white dark:bg-[#040c24]"
             onKeyDown={(e) => { if (e.key === "Enter") handleSubmit(); }}
             tabIndex={-1}
         >
@@ -235,16 +235,16 @@ const MemoryFlashQuiz = () => {
                 </div>
             )}
 
-            <div className="w-full flex flex-col items-center mt-10 md:mt-16 px-4">
+            <div className="w-full flex flex-col items-center  mt-10 md:mt-16 px-4">
 
                 {status === "idle" && (
                     <div className="flex flex-col items-center gap-7 w-full max-w-4xl">
 
                         <div className="text-center">
-                            <h1 className="text-4xl md:text-5xl 2xl:text-6xl font-bold baloo-bhai text-gray-800 dark:text-white">
+                            <h1 className="text-4xl md:text-5xl 2xl:text-6xl font-bold baloo-bhai text-gray-100 dark:text-white">
                                 Memory Flash
                             </h1>
-                            <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm 2xl:text-base">
+                            <p className="text-gray-200 dark:text-gray-400 mt-2 text-sm 2xl:text-base">
                                 Watch the sequence · remember it · type it back before time runs out!
                             </p>
                         </div>
@@ -265,8 +265,8 @@ const MemoryFlashQuiz = () => {
                                         key={id}
                                         onClick={() => setMode(id)}
                                         className={`py-4 px-4 rounded-2xl border-2 font-semibold text-left transition-all duration-200 ${mode === id
-                                            ? "bg-[#088395] border-[#088395] text-white scale-[1.03] shadow-lg"
-                                            : "border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:border-[#088395]"
+                                            ? "bg-[#088395] border-white text-white shadow-lg"
+                                            : "border-gray-200 dark:border-gray-700 text-gray-100 dark:text-gray-200 hover:bg-[#088395] hover:text-white hover:border-[#088395]"
                                             }`}
                                     >
                                         <span className="block text-base leading-tight">{label}</span>
@@ -279,9 +279,9 @@ const MemoryFlashQuiz = () => {
                         </div>
 
                         {/* Reverse toggle */}
-                        <div className="w-full flex items-center justify-between p-4 bg-gray-50 dark:bg-white/5 rounded-2xl border border-gray-200 dark:border-gray-700">
+                        <div className="w-full flex items-center justify-between p-4 bg-white/5 dark:bg-white/5 rounded-2xl border border-gray-200/5 dark:border-gray-700">
                             <div>
-                                <div className="font-semibold text-gray-800 dark:text-white">Reverse Mode</div>
+                                <div className="font-semibold text-gray-300 dark:text-white">Reverse Mode</div>
                                 <div className="text-xs text-gray-400 mt-0.5">Type the sequence in reverse order</div>
                             </div>
                             <button
@@ -301,7 +301,7 @@ const MemoryFlashQuiz = () => {
 
                         <button
                             onClick={handleStart}
-                            className="w-full py-4 bg-[#088395] hover:bg-[#066574] text-white rounded-2xl text-xl baloo-bhai transition-all hover:scale-105 shadow-lg"
+                            className="w-full md:w-auto px-8 py-4 bg-gray-900  text-white rounded-2xl text-xl baloo-bhai transition-all hover:scale-105 shadow-lg"
                         >
                             Start Game
                         </button>

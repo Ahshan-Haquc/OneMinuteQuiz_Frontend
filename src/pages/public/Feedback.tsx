@@ -1,6 +1,5 @@
 import { useState } from "react";
 import starIcon from "@/assets/icons/star.png";
-import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
 import { useAppSelector } from "@/redux/hooks";
 import { useSubmitFeedbackMutation } from "@/redux/api/endpoints/feedbackApi";
@@ -8,18 +7,12 @@ import { useNavigate } from "react-router-dom";
 
 const Feedback = () => {
   const [selectedRating, setSelectedRating] = useState(5);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [feedbackText, setFeedbackText] = useState("");
   const { user } = useAppSelector((state) => state.auth);
   const [submitFeedback] = useSubmitFeedbackMutation();
   const navigate = useNavigate();
 
-  const ratings = [5, 4, 3, 2, 1];
-
-  const handleRatingSelect = (rating: number) => {
-    setSelectedRating(rating);
-    setIsDropdownOpen(false);
-  };
+  const ratings = [1, 2, 3, 4, 5];
 
   const handleSubmitFeedback = async () => {
     try {
@@ -42,138 +35,134 @@ const Feedback = () => {
   };
 
   return (
-    <div className="h-full w-full flex flex-col dark:bg-[#040c24]">
+    <div className="min-h-screen w-full flex flex-col dark:bg-[#040c24] text-[#09637E]">
       <NavBar pageName="homePage" />
 
-      <div className="p-10 flex flex-col flex-grow gap-10">
-        {/* above part  */}
-        <div className="flex flex-col ">
-          <div className="h-fit text-lg md:text-2xl text-[#071952] dark:text-white baloo-bhai">
-            Feedback
-          </div>
-          <div className="h-fit text-sm md:text-xl text-[#071952] dark:text-white baloo-bhai2">
-            We would love to hear your thoughts on how you felt to exploring
-            these quizzes and how we can improve our website.
-          </div>
+      <div className="max-w-4xl w-full mx-auto p-4 md:p-8 flex flex-col flex-grow gap-8">
+        
+        {/* Header Title Section */}
+        <div className="text-center">
+          <h1 className="text-3xl md:text-5xl text-center font-bold baloo-bhai text-white dark:text-[#088395] mb-2">
+            Share Your Thoughts
+          </h1>
+          <p className=" text-sm md:text-lg text-gray-200 dark:text-[#088395] text-center baloo-bhai2 w-full leading-relaxed">
+            We would love to hear your thoughts on how you felt exploring
+            our quizzes and how we can make our website even better for you.
+          </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row bg-whi h-auto sm:h-12 items-start sm:items-center gap-4 sm:gap-0">
-          <div className="relative h-full w-full sm:w-auto">
-            <div
-              className="flex items-center justify-between h-12 p-2 border border-gray-500 rounded-lg cursor-pointer bg-white"
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            >
-              <span className="text-sm md:text-xl text-[#071952] flex items-center">
-                {[...Array(selectedRating)].map((_, i) => (
-                  <img
-                    key={i}
-                    src={starIcon}
-                    alt="star"
-                    className="w-4 h-4 ml-1 inline-block"
-                  />
-                ))}
-              </span>
-              <svg
-                className={`w-4 h-4 ml-2 transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : ""
-                  }`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M19 9l-7 7-7-7"
-                ></path>
-              </svg>
-            </div>
-
-            {isDropdownOpen && (
-              <div className="absolute z-10 top-full left-0 w-full bg-white border border-gray-500 rounded-lg mt-1 shadow-lg">
-                {ratings.map((rating) => (
-                  <div
+        {/* Main Feedback Form Card */}
+        <div className=" dark:bg-white/5 rounded-3xl p-6 md:p-8 shadow-xl border border-[#7AB2B2]/30 flex flex-col gap-6">
+          
+          {/* Tactile Interactive Star Selection */}
+          <div className="flex flex-col gap-2">
+            <label className="text-base md:text-xl font-bold baloo-bhai text-white dark:text-[#088395]">
+              Rate your experience:
+            </label>
+            <div className="flex items-center gap-2 bg-[#EBF4F6]/50 dark:bg-transparent p-3 rounded-2xl w-fit border border-[#7AB2B2]/20">
+              {ratings.map((rating) => {
+                const isActive = rating <= selectedRating;
+                return (
+                  <button
                     key={rating}
-                    className="flex items-center p-2 cursor-pointer hover:bg-gray-100"
-                    onClick={() => handleRatingSelect(rating)}
+                    type="button"
+                    onClick={() => setSelectedRating(rating)}
+                    className={`p-1.5 rounded-lg transition-all duration-150 transform hover:scale-110 active:scale-90 ${
+                      isActive ? "" : "opacity-40 grayscale"
+                    }`}
                   >
-                    {[...Array(rating)].map((_, i) => (
-                      <img
-                        key={i}
-                        src={starIcon}
-                        alt="star"
-                        className="w-4 h-4 mr-0.5 inline-block"
-                      />
-                    ))}
-                  </div>
-                ))}
-              </div>
-            )}
+                    <img
+                      src={starIcon}
+                      alt={`${rating} Star`}
+                      className="w-7 h-7 md:w-9 md:h-9 object-contain drop-shadow-xs"
+                    />
+                  </button>
+                );
+              })}
+              <span className="ml-2 font-bold baloo-bhai text-lg text-[#088395]">
+                {selectedRating} / 5
+              </span>
+            </div>
           </div>
 
-          <div className="h-full flex-grow border-b-2 border-gray-500 mx-0 sm:mx-4 w-full sm:w-auto">
-            <input
-              type="text"
-              placeholder="Enter your feedback here..."
-              className="w-full h-full bg-transparent text-sm md:text-xl text-[#071952] focus:outline-none"
-              onChange={(e) => setFeedbackText(e.target.value)}
-            />
+          {/* Upgraded Multi-line Input Field Container */}
+          <div className="flex flex-col gap-2">
+            <label className="text-base md:text-xl font-bold baloo-bhai text-white dark:text-[#088395]">
+              Your Comments:
+            </label>
+            <div className="w-full bg-[#EBF4F6]/30 dark:bg-transparent border-2 border-[#7AB2B2]/40 focus-within:border-[#088395] rounded-2xl p-4 transition-all shadow-inner">
+              <textarea
+                placeholder="Tell us what you liked or what we can fix..."
+                rows={4}
+                value={feedbackText}
+                onChange={(e) => setFeedbackText(e.target.value)}
+                className="w-full bg-transparent text-sm md:text-lg text-[#088395] dark:text-white focus:outline-none resize-none font-medium leading-relaxed placeholder-[#7AB2B2] dark:placeholder-white/30"
+              />
+            </div>
           </div>
 
-          <div className="h-full flex justify-center w-full sm:w-auto">
+          {/* Action Submit Area */}
+          <div className="flex justify-end mt-2">
             <button
+              disabled={!feedbackText}
               onClick={handleSubmitFeedback}
-              className="bg-[#37B7C3] text-white px-4 py-2 rounded-md hover:bg-[#35aab4] transition-colors duration-200 w-full sm:w-auto"
+              className={`bg-[#088395] hover:bg-[#09637E] text-white font-bold baloo-bhai text-lg md:text-xl px-8 py-3.5 rounded-2xl transition-all duration-200  hover:shadow-lg active:scale-95 w-full sm:w-auto text-center ${!feedbackText ? "cursor-not-allowed bg-slate-400 hover:bg-slate-400" : ""}`}
             >
               Submit Feedback
             </button>
           </div>
         </div>
 
-        {/* below part */}
-        <div className="flex flex-col gap-5 mt-12">
-          <div className="flex flex-col">
-            <div className="h-fit text-lg md:text-2xl text-[#071952] dark:text-white baloo-bhai">
-              User Ratings
-            </div>
-            <div className="h-fit text-sm md:text-xl text-[#071952] dark:text-white baloo-bhai2">
-              Nice to see that you are also here to participate in user feedback
-            </div>
+        {/* Stats and Analytics Section */}
+        <div className="flex flex-col gap-4 mt-4">
+          <div className="text-center md:text-left">
+            <h2 className="text-2xl font-bold baloo-bhai text-white dark:text-[#088395]">
+              Community Ratings
+            </h2>
+            <p className="text-xs md:text-sm text-[#7AB2B2] font-semibold baloo-bhai2">
+              Thank you for participating alongside our dynamic global community!
+            </p>
           </div>
-          <div className="flex gap-5">
-            <div className="min-h-[105px]  border border-gray-500 rounded-lg p-4">
-              <div className="text-lg md:text-2xl text-[#071952] dark:text-white baloo-bhai">
-                {`${selectedRating} `}
-                <img
-                  src={starIcon}
-                  alt="star"
-                  className="w-4 h-4 inline-block"
-                />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            
+            {/* Live Selected Choice Stat Box */}
+            <div className="bg-white border border-[#7AB2B2]/40 rounded-2xl p-4 md:p-5 shadow-sm flex items-center justify-between transition-all hover:shadow-md">
+              <div>
+                <div className="text-xs md:text-sm text-[#7AB2B2] font-bold uppercase tracking-wider baloo-bhai2 mb-1">
+                  Your Current Choice
+                </div>
+                <div className="text-2xl md:text-3xl font-extrabold text-[#09637E] baloo-bhai">
+                  {selectedRating}.0
+                </div>
               </div>
-              <div className="text-xs md:text-sm text-gray-500 baloo-bhai2">
-                Your rating <br />
-              </div>
-            </div>
-            <div className="min-h-[105px]  border border-gray-500 rounded-lg p-4">
-              <div className="text-lg md:text-2xl text-[#071952] dark:text-white baloo-bhai">
-                4.5{" "}
-                <img
-                  src={starIcon}
-                  alt="star"
-                  className="w-4 h-4 inline-block"
-                />
-              </div>
-              <div className="text-xs md:text-sm text-gray-500 baloo-bhai2">
-                Average rating <br />
-                Based on all user's rating
+              <div className="bg-[#EBF4F6] p-3 rounded-xl flex items-center gap-1">
+                {[...Array(selectedRating)].map((_, i) => (
+                  <img key={i} src={starIcon} alt="star" className="w-5 h-5 object-contain" />
+                ))}
               </div>
             </div>
+
+            {/* Total Community Summary Box */}
+            <div className="bg-white border border-[#7AB2B2]/40 rounded-2xl p-4 md:p-5 shadow-sm flex items-center justify-between transition-all hover:shadow-md">
+              <div>
+                <div className="text-xs md:text-sm text-[#7AB2B2] font-bold uppercase tracking-wider baloo-bhai2 mb-1">
+                  Global Platform Average
+                </div>
+                <div className="text-2xl md:text-3xl font-extrabold text-[#09637E] baloo-bhai">
+                  4.5
+                </div>
+              </div>
+              <div className="bg-amber-50 border border-amber-200 p-3 rounded-xl flex items-center gap-1.5">
+                <span className="text-xs font-bold text-amber-700 font-sans">Top Rated</span>
+                <img src={starIcon} alt="star" className="w-6 h-6 object-contain" />
+              </div>
+            </div>
+
           </div>
         </div>
-      </div>
 
-      <Footer />
+      </div>
     </div>
   );
 };
