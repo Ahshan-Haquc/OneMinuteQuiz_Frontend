@@ -135,7 +135,7 @@ const TargetClicker = () => {
           <div className="flex justify-center md:justify-end">
             {!isRunning ? (
               <button
-                className="w-full md:w-52 py-3 bg-[#088395] hover:bg-[#09637E] text-white rounded-2xl text-2xl baloo-bhai shadow-lg transition-all duration-300 hover:scale-105 active:scale-95"
+                className="w-full md:w-52 py-3 bg-black dark:bg-[#09637E] hover:bg-[#09637E] text-white rounded-2xl text-2xl baloo-bhai shadow-lg transition-all duration-300 hover:scale-105 active:scale-95"
                 onClick={startCountDown}
               >
                 Start Game

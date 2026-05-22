@@ -47,7 +47,7 @@ const NavBar = ({ pageName }: { pageName?: string }) => {
       <button
         onClick={() => navigate(-1)}
         className={`${pageName !== "showHomePage" ? "flex" : "hidden"
-          } group h-9 w-9 md:h-12 md:w-12 p-3 rounded-full bg-[#088395] text-white duration-300  flex items-center justify-center`}
+          } group h-9 w-9 md:h-12 md:w-12 p-3 rounded-full hover:bg-[#088395] text-white duration-300  flex items-center justify-center`}
       >
         {/* <img
           className="h-full w-full object-cover group-hover:invert-0 group-hover:brightness-100 invert brightness-0"
@@ -62,7 +62,7 @@ const NavBar = ({ pageName }: { pageName?: string }) => {
         <NavLink
           to={"/feedback"}
           className={({ isActive }) =>
-            `${isActive ? "bg-[#071952]" : "bg-[#088395]"
+            `${isActive ? "bg-[#071952]" : ""
             } group h-9 w-9 md:h-12 md:w-12 p-2 rounded-full text-white duration-300 hover:bg-white hover:text-[#088395] flex items-center justify-center`
           }
         >

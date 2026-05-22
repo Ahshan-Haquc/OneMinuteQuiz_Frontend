@@ -124,7 +124,7 @@ const QuickCalculate = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col bg-white">
+    <div className="min-h-screen w-full flex flex-col ">
       {!isRunning ? (
         <NavBar pageName="showQuickCalculate" />
       ) : (
@@ -164,13 +164,13 @@ const QuickCalculate = () => {
           {/* Action Buttons */}
           <div className="flex gap-3 md:gap-6 h-14 md:h-20">
             <button
-              className="flex-1 bg-[#7AB2B2] hover:bg-orange-400 text-white rounded-xl flex items-center justify-center text-xl md:text-4xl baloo-bhai transition-colors shadow-md active:scale-95"
+              className="flex-1 bg-orange-400 hover:bg-orange-500 text-white rounded-xl flex items-center justify-center text-xl md:text-4xl baloo-bhai transition-colors shadow-md active:scale-95"
               onClick={handleClear}
             >
               Clear
             </button>
             <button
-              className="flex-1 bg-[#088395] hover:bg-[#09637E] text-white rounded-xl flex items-center justify-center text-xl md:text-4xl baloo-bhai transition-colors shadow-md active:scale-95"
+              className="flex-1 bg-green-700 hover:bg-green-800 text-white rounded-xl flex items-center justify-center text-xl md:text-4xl baloo-bhai transition-colors shadow-md active:scale-95"
               onClick={handleSubmit}
             >
               Submit
@@ -180,7 +180,7 @@ const QuickCalculate = () => {
 
         {/* Sidebar Stats */}
         <div className="w-full max-w-[350px] flex flex-col gap-6 items-center bg-white md:bg-transparent p-6 md:p-0 rounded-3xl">
-          <div className="text-3xl md:text-4xl baloo-bhai text-[#09637E] dark:text-white hidden md:block">
+          <div className="text-3xl md:text-4xl baloo-bhai text-white dark:text-white hidden md:block">
             Live Stats
           </div>
 
