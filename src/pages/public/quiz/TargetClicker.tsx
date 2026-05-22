@@ -14,7 +14,7 @@ const TargetClicker = () => {
   const [timeCount, setTimeCount] = useState<number>(60);
   const [isRunning, setIsRunning] = useState<boolean>(false);
 
-  const [timerId, setTimerId] = useState(null);
+  const [timerId, setTimerId] = useState<any>(null);
 
   // Load highest score
   useEffect(() => {

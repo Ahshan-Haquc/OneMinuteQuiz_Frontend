@@ -1,5 +1,5 @@
 import NavBar from "@/components/NavBar";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 type QuizType =
   | "quickCalculate"
