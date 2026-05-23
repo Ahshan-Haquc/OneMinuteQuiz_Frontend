@@ -10,7 +10,6 @@ const Signup = () => {
 
   useEffect(() => {
     document.title = "Sign Up - 1MinuteQuiz";
-    alert("You do not need to verify your email. It is open for all. Just create an account with random email and password to explore the website.")
   }, []);
 
   const handleInput = (e: any) => {
