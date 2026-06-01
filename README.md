@@ -1,8 +1,8 @@
 # OneMinuteQuiz Frontend
 
 OneMinuteQuiz Frontend is a modern React-based interactive quiz gaming platform built with TypeScript and Tailwind CSS. It delivers multiple fast-paced 1-minute challenge games with responsive UI, real-time gameplay interactions, authentication handling, and admin dashboard interfaces. <br>
-Live link of the frontend: https://one-minute-quiz-frontend.vercel.app/  <br>
-Live link of the backend: https://github.com/Ahshan-Haquc/OneMinuteQuiz_Backend
+Live link of the project: https://one-minute-quiz-frontend.vercel.app/  <br>
+Github repository link of the backend: https://github.com/Ahshan-Haquc/OneMinuteQuiz_Backend
 
 ## Project Overview
 
