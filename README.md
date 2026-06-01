@@ -1,74 +1,83 @@
-# React + TypeScript + Vite
+# OneMinuteQuiz Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+OneMinuteQuiz Frontend is a modern React-based interactive quiz gaming platform built with TypeScript and Tailwind CSS. It delivers multiple fast-paced 1-minute challenge games with responsive UI, real-time gameplay interactions, authentication handling, and admin dashboard interfaces. <br>
+Live link of the frontend: https://one-minute-quiz-frontend.vercel.app/  <br>
+Live link of the backend: https://github.com/Ahshan-Haquc/OneMinuteQuiz_Backend
 
-Currently, two official plugins are available:
+## Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This frontend application provides:
 
-## React Compiler
+* Interactive real-time quiz gameplay experience
+* Multiple custom-built mini quiz games
+* Responsive design for mobile and desktop devices
+* JWT authentication flow integration
+* Protected user and admin routes
+* Dynamic game state management using React hooks and Redux Toolkit
+* Modern UI/UX with animations and game-focused layouts
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Implemented Quiz Games
 
-## Expanding the ESLint configuration
+* Quick Calculate Quiz
+* Guess The Word Quiz
+* Target Click Speed Game
+* Memory Flash Quiz
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+* React.js
+* TypeScript
+* Tailwind CSS
+* Shadcn/UI
+* Redux Toolkit
+* Vite
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Game Mechanics
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Quick Calculate Quiz
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Players solve arithmetic problems within one minute using dynamic number input controls.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-# OneMinuteQuiz_Frontend
+### Guess The Word Quiz
+
+Players guess hidden words using character-based input boxes with automatic focus movement and limited attempts.
+
+### Target Click Speed Game
+
+Players rapidly click randomly positioned targets before the timer expires.
+
+### Memory Flash Quiz
+
+Players memorize and repeat flashing sequences to test short-term memory speed.
+
+## Run Locally
+1. Clone the frontend and also the backend
+
+1. Install dependencies
+
+   ```bash
+   npm install
+   ```
+
+2. Start the development server
+
+   ```bash
+   npm run dev
+   ```
+
+## Backend Repository
+
+This frontend is connected with a separate Express + MongoDB backend API for authentication, admin controls, feedback management, and analytics. https://github.com/Ahshan-Haquc/OneMinuteQuiz_Backend
+
+## Developer Note
+
+This project was built to strengthen practical skills in:
+
+* Full Stack MERN Development
+* Advanced React State Management
+* Real-Time Game Logic
+* Authentication & Authorization
+* Responsive UI/UX Design
+* TypeScript Development
+* Competitive programming skills
