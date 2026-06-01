@@ -35,19 +35,19 @@ This frontend application provides:
 
 ## Game Mechanics
 
-### Quick Calculate Quiz
+1. Quick Calculate Quiz
 
 Players solve arithmetic problems within one minute using dynamic number input controls.
 
-### Guess The Word Quiz
+2. Guess The Word Quiz
 
 Players guess hidden words using character-based input boxes with automatic focus movement and limited attempts.
 
-### Target Click Speed Game
+3. Target Click Speed Game
 
 Players rapidly click randomly positioned targets before the timer expires.
 
-### Memory Flash Quiz
+4. Memory Flash Quiz
 
 Players memorize and repeat flashing sequences to test short-term memory speed.
 
