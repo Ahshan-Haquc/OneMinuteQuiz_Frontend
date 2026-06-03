@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import NavBar from "@/components/NavBar";
 import { useAppSelector } from "@/redux/hooks";
 import { Star, Users } from "lucide-react";
+import { useGetLandingPageDataQuery } from "@/redux/api/endpoints/quizApi";
 
 const QuizButton = ({
   to,
@@ -73,6 +74,9 @@ const QuizButton = ({
 
 const Home = () => {
   const { user } = useAppSelector((state) => state.auth);
+  const { data, isLoading, error } = useGetLandingPageDataQuery();
+  const landingPageData = data?.data;  
+  
   useEffect(() => {
     document.title = "1MinuteQuiz";
   }, []);
@@ -92,13 +96,13 @@ const Home = () => {
         {/* button part  */}
         <div className="w-full max-w-7xl mx-auto px-3 grid grid-cols-1 md:grid-cols-2 gap-3">
           {/* button 1 */}
-          <QuizButton to="/quickCalculate" text="Quick Calculate" bg="bg-red-900" rating={4.5} played={1000} />
+          <QuizButton to="/quickCalculate" text="Quick Calculate" bg="bg-red-900" rating={landingPageData?.totalQuickCalculateGameRating} played={landingPageData?.totalQuickCalculateGamePlayed || 122} />
           {/* button 2 */}
-          <QuizButton to="/guessTheWord" text="Quess The Word" bg="bg-blue-900" rating={4.2} played={1200}/>
+          <QuizButton to="/guessTheWord" text="Quess The Word" bg="bg-blue-900" rating={landingPageData?.totalGuessTheWordGameRating} played={landingPageData?.totalGuessTheWordGamePlayed || 32}/>
           {/* button 3 */}
-          <QuizButton to="/moneyFlash" text="Money Flash" bg="bg-purple-900" rating={4.8} played={900}/>
+          <QuizButton to="/moneyFlash" text="Money Flash" bg="bg-purple-900" rating={landingPageData?.totalMemoryFlashGameRating} played={landingPageData?.totalMemoryFlashGamePlayed || 47}/>
           {/* button 4 */}
-          <QuizButton to="/targetClicker" text="Target Clicker" bg="bg-amber-900" rating={4.1} played={1100}/>
+          <QuizButton to="/targetClicker" text="Target Clicker" bg="bg-amber-900" rating={landingPageData?.totalTargetClickerGameRating} played={landingPageData?.totalTargetClickerGamePlayed || 9}/>
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@ export const authApi = baseApi.injectEndpoints({
       query: () => ({
         url: '/me',
         method: 'GET',
-        credentials: 'omit', // Update to 'include' if required. Usually vite dev server handles proxy cookies. Let's make it include just like before.
+        credentials: 'include',
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
