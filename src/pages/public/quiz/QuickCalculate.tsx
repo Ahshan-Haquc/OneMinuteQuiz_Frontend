@@ -51,6 +51,9 @@ const QuickCalculate = () => {
 
   const startCountDown = () => {
     if (isRunning) return;
+
+    
+
     generateNewQuestion();
     setIsRunning(true);
     setTimeCount(60);
@@ -185,7 +188,7 @@ const QuickCalculate = () => {
           </div>
 
           <div className="grid grid-cols-3 md:grid-cols-1 gap-4 w-full">
-            <HighestScore />
+            <HighestScore gameName="quickCalculate"/>
             <StatCard label="Total" value={scoreBoard.totalAttempt} color="text-[#09637E]" />
             <StatCard label="Wrong" value={scoreBoard.wrongAnswer} color="text-red-500" />
             <StatCard label="Correct" value={scoreBoard.correctAnswer} color="text-green-600" />

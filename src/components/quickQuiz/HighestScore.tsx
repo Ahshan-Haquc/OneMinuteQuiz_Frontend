@@ -1,6 +1,21 @@
+import { useGetTopThreeHighestScoresQuery } from "@/redux/api/endpoints/quizApi";
+import { Loader } from "lucide-react";
 
 
-export default function HighestScore() {
+export default function HighestScore({gameName}: {gameName?: string}) {
+    const {data: topThreeHighestScores, isLoading} = useGetTopThreeHighestScoresQuery(gameName);
+    let score:{first: number, second: number, third: number} = {first: 0, second: 0, third: 0};
+    
+    if(gameName==="quickCalculate"){
+        score = topThreeHighestScores?.data?.quickCalculateTopThreeScores;
+    }else if(gameName==="guessTheWord"){
+        score = topThreeHighestScores?.data?.guessTheWordTopThreeScores;
+    }else if(gameName==="targetClicker"){
+        score = topThreeHighestScores?.data?.targetClickerTopThreeScores;
+    }else{
+        score = topThreeHighestScores?.data?.memoryFlashTopThreeScores;
+    }
+
     return (
         <div className="w-[350px] hidden md:flex flex-col items-center">
             <div className="baloo-bhai2 dark:text-white text-xs xl:text-xl text-center">
@@ -15,7 +30,13 @@ export default function HighestScore() {
                     >
                         1st
                     </div>
-                    <span className="flex-1 text-gray-800 text-xs dark:text-white font-semibold">43</span>
+                    <span className="flex-1 text-gray-800 dark:text-white font-bold text-lg">
+                        {isLoading ? (
+                            <Loader size={16} className="animate-spin" />
+                        ) : (
+                            score?.first
+                        )}
+                    </span>
                 </div>
 
                 {/* 2nd place */}
@@ -25,7 +46,13 @@ export default function HighestScore() {
                     >
                         2nd
                     </div>
-                    <span className="flex-1 text-gray-800 text-xs dark:text-white font-semibold">36</span>
+                    <span className="flex-1 text-gray-800 dark:text-white font-bold text-lg">
+                        {isLoading ? (
+                            <Loader size={16} className="animate-spin" />
+                        ) : (
+                            score?.second
+                        )}
+                    </span>
                 </div>
 
                 {/* 3rd place */}
@@ -35,7 +62,13 @@ export default function HighestScore() {
                     >
                         3rd
                     </div>
-                    <span className="flex-1 text-gray-800 text-xs dark:text-white font-semibold">35</span>
+                    <span className="flex-1 text-gray-800 dark:text-white font-bold text-lg">
+                        {isLoading ? (
+                            <Loader size={16} className="animate-spin" />
+                        ) : (
+                            score?.third
+                        )}
+                    </span>
                 </div>
             </div>
         </div>
