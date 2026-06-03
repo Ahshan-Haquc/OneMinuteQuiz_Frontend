@@ -3,6 +3,8 @@ import NavBar from "@/components/NavBar";
 import clock from "@/assets/icons/clock.png";
 import CharInputBox from "@/components/guessQuiz/CharInputBox";
 import RatingModal from "@/components/RatingModal";
+import { useUpdateTotalPlayCountMutation } from "@/redux/api/endpoints/quizApi";
+import { Loader } from "lucide-react";
 
 // Types
 type Level = "easy" | "medium" | "hard";
@@ -71,6 +73,8 @@ const GuessTheWord = () => {
   const [attemptsLeft, setAttemptsLeft] = useState(MAX_ATTEMPTS);
   const [isRatingOpen, setIsRatingOpen] = useState(false);
 
+  const [updateTotalPlayCount,{isLoading:isUpdateTotalPlayCountLoading}] = useUpdateTotalPlayCountMutation();
+
   useEffect(() => { document.title = "Guess The Word"; }, []);
 
   // Timer 
@@ -87,6 +91,8 @@ const GuessTheWord = () => {
 
   // Actions
   const handleStart = () => {
+    updateTotalPlayCount({gameName:"guessTheWord"});
+
     const word = getRandomWord(level);
     const revealed = getInitialRevealedPositions(word.length, INITIAL_REVEALED[level]);
     setTargetWord(word);
@@ -259,7 +265,11 @@ const GuessTheWord = () => {
               onClick={handleStart}
               className="px-10 py-3 border border-white dark:border-transparent bg-[#088395] hover:bg-[#066574] text-white rounded-xl text-xl baloo-bhai transition-all duration-200 hover:scale-105 shadow-md"
             >
-              Start Game
+              {isUpdateTotalPlayCountLoading ? (
+                  <Loader className="h-5 w-5 animate-spin" />
+                ) : (
+                  "Start Game"
+                )}
             </button>
           </div>
         )}
