@@ -10,8 +10,20 @@ export const quizApi = baseApi.injectEndpoints({
       query: (gameName: string) => `/quiz/getTopThreeHighestScores/${gameName}`,
       providesTags: ['Quiz'],
     }),
-    updateTopThreeHighestScores: builder.mutation<any, string>({
-      query: ({gameName: string, score: number}) => `/quiz/updateTopThreeHighestScores/${gameName}/${score}`,
+    updateTopThreeHighestScores: builder.mutation<any, {gameName: string, score: number}>({
+      query: ({gameName, score}) => ({
+        url: `/quiz/updateHighestScore/${gameName}`,
+        method: "POST",
+        body: {score},
+      }),
+      invalidatesTags: ['Quiz'],
+    }),
+    updateRatingOfSpecificGame: builder.mutation<any, {gameName: string, rating: number}>({
+      query: ({gameName, rating}) => ({
+        url: `/quiz/updateRating/${gameName}`,
+        method: "POST",
+        body: {rating},
+      }),
       invalidatesTags: ['Quiz'],
     }),
   }),
@@ -20,4 +32,6 @@ export const quizApi = baseApi.injectEndpoints({
 export const {
   useGetLandingPageDataQuery,
   useGetTopThreeHighestScoresQuery,
+  useUpdateTopThreeHighestScoresMutation,
+  useUpdateRatingOfSpecificGameMutation,
 } = quizApi;
