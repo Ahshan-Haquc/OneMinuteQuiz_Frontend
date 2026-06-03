@@ -74,7 +74,7 @@ const QuizButton = ({
 
 const Home = () => {
   const { user } = useAppSelector((state) => state.auth);
-  const { data, isLoading, error } = useGetLandingPageDataQuery();
+  const { data} = useGetLandingPageDataQuery();
   const landingPageData = data?.data;  
   
   useEffect(() => {

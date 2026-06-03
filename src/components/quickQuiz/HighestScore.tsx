@@ -2,7 +2,7 @@ import { useGetTopThreeHighestScoresQuery } from "@/redux/api/endpoints/quizApi"
 import { Loader } from "lucide-react";
 
 
-export default function HighestScore({gameName}: {gameName?: string}) {
+export default function HighestScore({gameName=''}: {gameName?: string}) {
     const {data: topThreeHighestScores, isLoading} = useGetTopThreeHighestScoresQuery(gameName);
     let score:{first: number, second: number, third: number} = {first: 0, second: 0, third: 0};
     

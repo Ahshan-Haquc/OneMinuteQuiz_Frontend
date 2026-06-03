@@ -8,6 +8,7 @@ import { setQuickNum } from "@/redux/features/quiz/quizSlice";
 import HighestScore from "@/components/quickQuiz/HighestScore";
 import { useUpdateTopThreeHighestScoresMutation, useUpdateTotalPlayCountMutation } from "@/redux/api/endpoints/quizApi";
 import { Loader } from "lucide-react";
+import RatingModal from "@/components/RatingModal";
 
 const operators = ["+", "-", "*"];
 
@@ -18,6 +19,7 @@ const QuickCalculate = () => {
   const [updateTopThreeHighestScores] = useUpdateTopThreeHighestScoresMutation();
 
   const [showingResult, setShowingResult] = useState(false);
+  const [isRatingOpen, setIsRatingOpen] = useState(false);
   const [timeCount, setTimeCount] = useState(60);
   const [scoreBoard, setScoreBoard] = useState({
     totalAttempt: 0,
@@ -132,6 +134,7 @@ const QuickCalculate = () => {
   };
   const handleCloseResultPopup = () => {
     setShowingResult(false);
+    setIsRatingOpen(true);
   };
 
   return (
@@ -227,6 +230,12 @@ const QuickCalculate = () => {
           resetStates={resetStates}
         />
       )}
+
+      <RatingModal
+        isOpen={isRatingOpen} 
+        setIsOpen={setIsRatingOpen} 
+        gameName={"QuickCalculate"} 
+      />
     </div>
   );
 };
