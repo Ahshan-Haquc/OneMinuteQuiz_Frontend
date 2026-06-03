@@ -13,7 +13,7 @@ export const quizApi = baseApi.injectEndpoints({
     updateTopThreeHighestScores: builder.mutation<any, {gameName: string, score: number}>({
       query: ({gameName, score}) => ({
         url: `/quiz/updateHighestScore/${gameName}`,
-        method: "POST",
+        method: "PATCH",
         body: {score},
       }),
       invalidatesTags: ['Quiz'],
@@ -21,8 +21,15 @@ export const quizApi = baseApi.injectEndpoints({
     updateRatingOfSpecificGame: builder.mutation<any, {gameName: string, rating: number}>({
       query: ({gameName, rating}) => ({
         url: `/quiz/updateRating/${gameName}`,
-        method: "POST",
+        method: "PATCH",
         body: {rating},
+      }),
+      invalidatesTags: ['Quiz'],
+    }),
+    updateTotalPlayCount: builder.mutation<any, {gameName: string}>({
+      query: ({gameName}) => ({
+        url: `/quiz/updateTotalPlayCount/${gameName}`,
+        method: "PATCH",
       }),
       invalidatesTags: ['Quiz'],
     }),
@@ -34,4 +41,5 @@ export const {
   useGetTopThreeHighestScoresQuery,
   useUpdateTopThreeHighestScoresMutation,
   useUpdateRatingOfSpecificGameMutation,
+  useUpdateTotalPlayCountMutation,
 } = quizApi;

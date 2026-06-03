@@ -6,12 +6,17 @@ import ShowingResult from "@/components/quickQuiz/ShowingResult";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { setQuickNum } from "@/redux/features/quiz/quizSlice";
 import HighestScore from "@/components/quickQuiz/HighestScore";
+import { useUpdateTopThreeHighestScoresMutation, useUpdateTotalPlayCountMutation } from "@/redux/api/endpoints/quizApi";
+import { Loader } from "lucide-react";
 
 const operators = ["+", "-", "*"];
 
 const QuickCalculate = () => {
   const quickNum = useAppSelector((state) => state.quiz.quickNum);
   const dispatch = useAppDispatch();
+  const [updateTotalPlayCount,{isLoading:isUpdateTotalPlayCountLoading}] = useUpdateTotalPlayCountMutation();
+  const [updateTopThreeHighestScores] = useUpdateTopThreeHighestScoresMutation();
+
   const [showingResult, setShowingResult] = useState(false);
   const [timeCount, setTimeCount] = useState(60);
   const [scoreBoard, setScoreBoard] = useState({
@@ -52,7 +57,7 @@ const QuickCalculate = () => {
   const startCountDown = () => {
     if (isRunning) return;
 
-    
+    updateTotalPlayCount({gameName:"quickCalculate"});
 
     generateNewQuestion();
     setIsRunning(true);
@@ -86,6 +91,9 @@ const QuickCalculate = () => {
 
   const endCountDown = () => {
     if (timerId) clearInterval(timerId);
+
+    updateTopThreeHighestScores({gameName:"quickCalculate", score: scoreBoard.correctAnswer})
+
     handleShowResultPopup();
     setIsRunning(false);
     setTimeCount(60);
@@ -199,7 +207,7 @@ const QuickCalculate = () => {
               className="w-full md:w-48 py-3 bg-[#088395] hover:bg-[#09637E] text-white rounded-2xl text-2xl baloo-bhai shadow-lg transition-transform hover:scale-105"
               onClick={startCountDown}
             >
-              Start Game
+              {isUpdateTotalPlayCountLoading ? <Loader className="animate-spin" size={18}/> : "Start Game"}
             </button>
           ) : (
             <button
