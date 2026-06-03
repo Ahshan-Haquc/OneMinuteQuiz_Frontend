@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import NavBar from "@/components/NavBar";
 import clock from "@/assets/icons/clock.png";
 import CharInputBox from "@/components/guessQuiz/CharInputBox";
+import RatingModal from "@/components/RatingModal";
 
 // Types
 type Level = "easy" | "medium" | "hard";
@@ -68,6 +69,7 @@ const GuessTheWord = () => {
   const [gameStatus, setGameStatus] = useState<GameStatus>("idle");
   const [timeLeft, setTimeLeft] = useState(TIME_LIMIT);
   const [attemptsLeft, setAttemptsLeft] = useState(MAX_ATTEMPTS);
+  const [isRatingOpen, setIsRatingOpen] = useState(false);
 
   useEffect(() => { document.title = "Guess The Word"; }, []);
 
@@ -204,7 +206,7 @@ const GuessTheWord = () => {
             )}
 
             <button
-              onClick={() => setGameStatus("idle")}
+              onClick={() => {setIsRatingOpen(true); setGameStatus("idle")}}
               className="mt-6 px-8 py-3 bg-[#088395] hover:bg-[#066574] transition-all duration-300 rounded-lg text-xl baloo-bhai shadow-md hover:scale-105"
             >
               Play Again
@@ -354,6 +356,11 @@ const GuessTheWord = () => {
           </div>
         )}
       </div>
+      <RatingModal
+        isOpen={isRatingOpen} 
+        setIsOpen={setIsRatingOpen} 
+        gameName={"GuessTheWord"} 
+      />
     </div>
   );
 };
