@@ -3,6 +3,9 @@ import NavBar from "@/components/NavBar";
 import clock from "@/assets/icons/clock.png";
 import { useEffect, useState } from "react";
 import HighestScore from "@/components/quickQuiz/HighestScore";
+import RatingModal from "@/components/RatingModal";
+import { useUpdateTopThreeHighestScoresMutation, useUpdateTotalPlayCountMutation } from "@/redux/api/endpoints/quizApi";
+import { Loader } from "lucide-react";
 
 const TargetClicker = () => {
   const [randomNumberTop, setRandomNumberTop] = useState<number>(50);
@@ -15,6 +18,11 @@ const TargetClicker = () => {
   const [isRunning, setIsRunning] = useState<boolean>(false);
 
   const [timerId, setTimerId] = useState<any>(null);
+
+  const [isRatingOpen, setIsRatingOpen] = useState(false);
+
+  const [updateTotalPlayCount, { isLoading: isUpdateTotalPlayCountLoading }] = useUpdateTotalPlayCountMutation();
+  const [updateTopThreeHighestScores] = useUpdateTopThreeHighestScoresMutation();
 
   // Load highest score
   useEffect(() => {
@@ -35,8 +43,9 @@ const TargetClicker = () => {
   };
 
   // Start Game
-  const startCountDown = () => {
+  const startCountDown = async () => {
     if (isRunning) return;
+    await updateTotalPlayCount({ gameName: "targetClicker" }).unwrap();
 
     setIsRunning(true);
     setScore(0);
@@ -60,12 +69,17 @@ const TargetClicker = () => {
   };
 
   // End Game
-  const endGame = () => {
+  const endGame = async () => {
     if (timerId) {
       clearInterval(timerId);
     }
 
     setIsRunning(false);
+
+    await updateTopThreeHighestScores({
+      gameName: "targetClicker",
+      score,
+    }).unwrap();
 
     // Save highest score
     if (score > highestScore) {
@@ -77,7 +91,7 @@ const TargetClicker = () => {
   // Quit manually
   const endCountDown = () => {
     endGame();
-    setTimeCount(60);
+    setTimeCount(0);
   };
 
   // Handle target click
@@ -96,7 +110,7 @@ const TargetClicker = () => {
       {/* Top Info Section */}
       <div className="w-full px-4 md:px-8 mt-2 md:mt-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4 items-center">
-          
+
           {/* Timer */}
           <div className="flex justify-center md:justify-start">
             <div className="flex items-center bg-[#EBF4F6] px-5 py-2 rounded-2xl border border-[#7AB2B2] shadow-md">
@@ -123,22 +137,27 @@ const TargetClicker = () => {
               </div>
             </div>
 
-            <div className="bg-[#EBF4F6] px-5 py-2 rounded-2xl border border-[#7AB2B2] shadow-md center">
+            {/* <div className="bg-[#EBF4F6] px-5 py-2 rounded-2xl border border-[#7AB2B2] shadow-md center">
               <div className="text-lg text-[#09637E] text-center baloo-bhai">
                 Your Highest: {highestScore}
               </div>
-            </div>
-            <HighestScore/>
+            </div> */}
+            <HighestScore gameName="targetClicker" />
           </div>
 
           {/* Button */}
           <div className="flex justify-center md:justify-end">
             {!isRunning ? (
               <button
-                className="w-full md:w-52 py-3 bg-black dark:bg-[#09637E] hover:bg-[#09637E] text-white rounded-2xl text-2xl baloo-bhai shadow-lg transition-all duration-300 hover:scale-105 active:scale-95"
+                className="w-full md:w-52 py-3 bg-black dark:bg-[#09637E] hover:bg-[#09637E] text-white rounded-2xl text-2xl baloo-bhai shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                 onClick={startCountDown}
+                disabled={isUpdateTotalPlayCountLoading}
               >
-                Start Game
+                {isUpdateTotalPlayCountLoading ? (
+                  <Loader className="h-5 w-5 animate-spin" />
+                ) : (
+                  "Start Game"
+                )}
               </button>
             ) : (
               <button
@@ -154,7 +173,7 @@ const TargetClicker = () => {
 
       {/* Game Area */}
       <div className="relative flex-grow mt-3 md:mt-10 border-2 border-dashed border-[#7AB2B2] mx-2 md:mx-8 rounded-3xl overflow-hidden bg-[#ebf4f61f] backdrop-blur-sm">
-        
+
         {/* Instruction */}
         {!isRunning && (
           <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
@@ -185,7 +204,7 @@ const TargetClicker = () => {
 
             {/* Main Circle */}
             <div className="relative h-full w-full rounded-full bg-gradient-to-br from-red-400 to-red-700 border-4 border-white shadow-[0_0_30px_rgba(255,0,0,0.8)] flex items-center justify-center">
-              
+
               {/* Inner Circle */}
               <div className="h-4 w-4 md:h-6 md:w-6 rounded-full bg-white"></div>
             </div>
@@ -212,7 +231,7 @@ const TargetClicker = () => {
                 </h2>
               </div>
 
-              <div>
+              {/* <div>
                 <p className="text-lg text-gray-500">
                   Highest Score
                 </p>
@@ -220,7 +239,9 @@ const TargetClicker = () => {
                 <h2 className="text-4xl text-[#088395] baloo-bhai">
                   {highestScore}
                 </h2>
-              </div>
+              </div> */}
+              <HighestScore gameName="targetClicker" />
+
             </div>
 
             <button
@@ -228,6 +249,7 @@ const TargetClicker = () => {
               onClick={() => {
                 setScore(0);
                 setTimeCount(60);
+                setIsRatingOpen(true);
               }}
             >
               Play Again
@@ -235,6 +257,11 @@ const TargetClicker = () => {
           </div>
         </div>
       )}
+      <RatingModal
+        isOpen={isRatingOpen}
+        setIsOpen={setIsRatingOpen}
+        gameName={"TargetClicker"}
+      />
     </div>
   );
 };

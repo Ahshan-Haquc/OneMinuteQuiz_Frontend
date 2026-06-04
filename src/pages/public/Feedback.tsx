@@ -1,36 +1,30 @@
 import { useState } from "react";
 import starIcon from "@/assets/icons/star.png";
 import NavBar from "@/components/NavBar";
-import { useAppSelector } from "@/redux/hooks";
-import { useSubmitFeedbackMutation } from "@/redux/api/endpoints/feedbackApi";
 import { useNavigate } from "react-router-dom";
+import { useSubmitFeedbackMutation } from "@/redux/api/endpoints/feedbackApi";
+import { toast } from "react-toastify";
 
 const Feedback = () => {
   const [selectedRating, setSelectedRating] = useState(5);
   const [feedbackText, setFeedbackText] = useState("");
-  const { user } = useAppSelector((state) => state.auth);
-  const [submitFeedback] = useSubmitFeedbackMutation();
   const navigate = useNavigate();
+
+  const [submitFeedback] = useSubmitFeedbackMutation();
 
   const ratings = [1, 2, 3, 4, 5];
 
   const handleSubmitFeedback = async () => {
     try {
-      if (!user) {
-        alert("Please login first to submit feedback!");
-        return;
-      }
       await submitFeedback({
-        userId: user._id,
-        userName: user.name,
         feedbackText: feedbackText,
         rating: selectedRating,
       }).unwrap();
 
-      alert("Thanks for your feedback!!!");
+      toast.success("Thanks for your feedback!!!");
       navigate("/");
     } catch (error) {
-      alert("Feedback not sent. Please try later!");
+      toast.error("Feedback not sent. Please try later!");
     }
   };
 
@@ -79,7 +73,7 @@ const Feedback = () => {
                   </button>
                 );
               })}
-              <span className="ml-2 font-bold baloo-bhai text-lg text-[#088395]">
+              <span className="ml-2 font-bold baloo-bhai text-lg text-white dark:text-[#088395]">
                 {selectedRating} / 5
               </span>
             </div>
@@ -92,11 +86,11 @@ const Feedback = () => {
             </label>
             <div className="w-full bg-[#EBF4F6]/30 dark:bg-transparent border-2 border-[#7AB2B2]/40 focus-within:border-[#088395] rounded-2xl p-4 transition-all shadow-inner">
               <textarea
-                placeholder="Tell us what you liked or what we can fix..."
+                placeholder="Tell us how was your experience? or how we can improve our platform?"
                 rows={4}
                 value={feedbackText}
                 onChange={(e) => setFeedbackText(e.target.value)}
-                className="w-full bg-transparent text-sm md:text-lg text-[#088395] dark:text-white focus:outline-none resize-none font-medium leading-relaxed placeholder-[#7AB2B2] dark:placeholder-white/30"
+                className="w-full bg-transparent text-sm md:text-lg text-white dark:text-white focus:outline-none resize-none font-medium leading-relaxed placeholder-[#247070] dark:placeholder-white/30"
               />
             </div>
           </div>
