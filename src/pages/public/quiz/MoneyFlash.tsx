@@ -329,9 +329,9 @@ const MemoryFlashQuiz = () => {
                         <div className="w-full flex items-center justify-between bg-white dark:bg-white/5 border border-gray-200 dark:border-gray-700 rounded-2xl px-5 py-3 gap-2">
 
                             {/* Timer */}
-                            <div className="flex items-center gap-2 min-w-[90px]">
+                            <div className="flex items-center gap-2 min-w-[130px]">
                                 <img src={clock} alt="" className="h-5 w-5 opacity-70" />
-                                <span className={`text-2xl font-bold baloo-bhai tabular-nums ${timeLeft <= 10 ? "text-red-500 animate-pulse" : "text-[#088395]"
+                                <span className={`text-2xl xl:text-4xl font-bold baloo-bhai tabular-nums ${timeLeft <= 10 ? "text-red-500 animate-pulse" : "text-[#088395]"
                                     }`}>
                                     00:{timeLeft.toString().padStart(2, "0")}
                                 </span>
@@ -340,18 +340,18 @@ const MemoryFlashQuiz = () => {
                             {/* Round + seq length */}
                             <div className="text-center">
                                 <div className="text-xs text-gray-400 uppercase tracking-wider">Round</div>
-                                <div className="text-xl font-bold text-gray-800 dark:text-white">{round}</div>
+                                <div className="text-xl xl:text-3xl font-bold text-gray-800 dark:text-white">{round}</div>
                             </div>
 
                             {/* Live score */}
                             <div className="flex gap-4 items-center">
                                 <div className="text-center">
-                                    <div className="text-xl font-bold text-green-500">{stats.correct}</div>
-                                    <div className="text-[10px] text-gray-400">Correct</div>
+                                    <div className="text-xl xl:text-3xl font-bold text-green-500">{stats.correct}</div>
+                                    <div className="text-[10px] xl:text-sm text-gray-700 dark:text-gray-400">Correct</div>
                                 </div>
                                 <div className="text-center">
-                                    <div className="text-xl font-bold text-red-400">{stats.wrong}</div>
-                                    <div className="text-[10px] text-gray-400">Wrong</div>
+                                    <div className="text-xl xl:text-3xl font-bold text-red-400">{stats.wrong}</div>
+                                    <div className="text-[10px] xl:text-sm text-gray-700 dark:text-gray-400">Wrong</div>
                                 </div>
                                 {stats.streak >= 2 && (
                                     <div className="text-center">
@@ -518,9 +518,9 @@ const MemoryFlashQuiz = () => {
                         </div>
 
                         {/* Seq length indicator */}
-                        <p className="text-xs text-gray-400 dark:text-gray-500">
+                        <p className="text-xs text-gray-700 dark:text-gray-500">
                             Sequence length this round:{" "}
-                            <span className="font-semibold text-[#088395]">{sequence.length}</span>
+                            <span className="font-semibold text-gray-800 dark:text-[#088395]">{sequence.length}</span>
                         </p>
 
                         <button
