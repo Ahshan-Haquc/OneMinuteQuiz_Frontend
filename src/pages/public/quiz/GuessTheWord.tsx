@@ -19,18 +19,17 @@ interface GuessRecord {
 const WORDS: Record<Level, string[]> = {
   easy: [
     "APPLE", "MANGO", "CHAIR", "PHONE", "PLANT",
-    "MONEY", "GRAPE", "OCEAN", "TIGER", "BRAIN",
-    "FLAME", "GLOBE", "HORSE", "IVORY", "JEWEL",
+    "MONEY", "TIGER", "BRAIN", "HORSE", "HOUSE",
+    "LEMON", "RIVER", "TABLE", "WATER", "NIGHT"
   ],
   medium: [
-    "ELEMENT", "CABINET", "JOURNEY", "BLANKET", "CAPTAIN",
-    "DOLPHIN", "FACTORY", "HARMONY", "LANTERN", "MESSAGE",
-    "PATTERN", "QUARTER", "RACCOON", "STATION", "TRUMPET",
+    "ELEMENT", "JOURNEY", "BLANKET",
+    "FACTORY", "MESSAGE", "TRAFFIC", "UNIVERSE",
+    "PATTERN", "STATION",
   ],
   hard: [
     "ADVENTURE", "BEAUTIFUL", "CHALLENGE", "CHOCOLATE", "DANGEROUS",
-    "ELABORATE", "FANTASTIC", "HIBERNATE", "INFLUENCE", "JUSTIFIED",
-    "KNOWLEDGE", "LANDSCAPE", "MECHANISM", "NOURISHED", "ORGANISED",
+    "FANTASTIC", "KNOWLEDGE",
   ],
 };
 

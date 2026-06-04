@@ -100,7 +100,7 @@ const Home = () => {
           {/* button 2 */}
           <QuizButton to="/guessTheWord" text="Quess The Word" bg="bg-blue-900" rating={landingPageData?.totalGuessTheWordGameRating} played={landingPageData?.totalGuessTheWordGamePlayed || 32}/>
           {/* button 3 */}
-          <QuizButton to="/moneyFlash" text="Money Flash" bg="bg-purple-900" rating={landingPageData?.totalMemoryFlashGameRating} played={landingPageData?.totalMemoryFlashGamePlayed || 47}/>
+          <QuizButton to="/moneyFlash" text="Memory Flash" bg="bg-purple-900" rating={landingPageData?.totalMemoryFlashGameRating} played={landingPageData?.totalMemoryFlashGamePlayed || 47}/>
           {/* button 4 */}
           <QuizButton to="/targetClicker" text="Target Clicker" bg="bg-amber-900" rating={landingPageData?.totalTargetClickerGameRating} played={landingPageData?.totalTargetClickerGamePlayed || 9}/>
         </div>
