@@ -2,13 +2,13 @@ import { baseApi } from '../baseApi';
 
 export const feedbackApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getFeedback: builder.query<any, void>({
-      query: () => '/getFeedback',
+    getFeedback: builder.query<any, any>({
+      query: ({page}) => `/feedback/getAllFeedback/${page}`,
       providesTags: ['Feedback'],
     }),
     submitFeedback: builder.mutation<any, any>({
       query: (feedbackData) => ({
-        url: '/feedback',
+        url: '/feedback/sentFeedback',
         method: 'POST',
         body: feedbackData,
       }),
@@ -16,7 +16,7 @@ export const feedbackApi = baseApi.injectEndpoints({
     }),
     deleteFeedback: builder.mutation<any, string>({
       query: (id) => ({
-        url: '/deleteFeedback',
+        url: '/feedback/deleteAllFeedback',
         method: 'DELETE',
         body: { id },
       }),
