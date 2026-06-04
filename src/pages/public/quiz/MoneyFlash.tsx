@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import NavBar from "@/components/NavBar";
 import clock from "@/assets/icons/clock.png";
+import { useUpdateTotalPlayCountMutation } from "@/redux/api/endpoints/quizApi";
+import RatingModal from "@/components/RatingModal";
+import { Loader } from "lucide-react";
 
 // Types 
 type GameStatus = "idle" | "showing" | "input" | "ended";
@@ -69,6 +72,9 @@ const MemoryFlashQuiz = () => {
     const gameOverRef = useRef(false);
     const feedbackTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+    const [isRatingOpen, setIsRatingOpen] = useState(false);
+    const [updateTotalPlayCount, { isLoading: isUpdateTotalPlayCountLoading }] = useUpdateTotalPlayCountMutation();
+
     useEffect(() => { document.title = "Memory Flash Quiz"; }, []);
     useEffect(() => () => { if (feedbackTimer.current) clearTimeout(feedbackTimer.current); }, []);
 
@@ -112,6 +118,7 @@ const MemoryFlashQuiz = () => {
     };
 
     const handleStart = () => {
+        updateTotalPlayCount({ gameName: "memoryFlash" })
         gameOverRef.current = false;
         setStats({ correct: 0, wrong: 0, streak: 0, highStreak: 0, total: 0 });
         setTimeLeft(TIME_LIMIT);
@@ -226,7 +233,10 @@ const MemoryFlashQuiz = () => {
                         </div>
 
                         <button
-                            onClick={() => setStatus("idle")}
+                            onClick={() => {
+                                setStatus("idle")
+                                setIsRatingOpen(true)
+                            }}
                             className="w-full py-3 bg-[#088395] hover:bg-[#066574] transition-all duration-300 rounded-xl text-xl baloo-bhai hover:scale-105"
                         >
                             Play Again
@@ -301,9 +311,12 @@ const MemoryFlashQuiz = () => {
 
                         <button
                             onClick={handleStart}
+                            disabled={isUpdateTotalPlayCountLoading}
                             className="w-full md:w-auto px-8 py-4 bg-gray-900  text-white rounded-2xl text-xl baloo-bhai transition-all hover:scale-105 shadow-lg"
                         >
-                            Start Game
+                            {isUpdateTotalPlayCountLoading ? <>
+                                <Loader className="animate-spin" size={20} />
+                            </> : "Start Game"}
                         </button>
                     </div>
                 )}
@@ -519,6 +532,11 @@ const MemoryFlashQuiz = () => {
 
                     </div>
                 )}
+                <RatingModal
+                    isOpen={isRatingOpen}
+                    setIsOpen={setIsRatingOpen}
+                    gameName={"MemoryFlash"}
+                />
             </div>
             <style>{`
         @keyframes mfShrink {
