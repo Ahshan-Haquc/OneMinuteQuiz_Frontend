@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+ import { ToastContainer} from 'react-toastify';
 
 export default function MainLayout() {
   return (
@@ -20,6 +21,8 @@ export default function MainLayout() {
 
       <div className="absolute top-[40%] left-[45%] h-[200px] w-[200px] rounded-full bg-blue-100/10 blur-3xl"></div>
 
+
+      <ToastContainer />
       {/* Main page content */}
       <div className="relative z-10">
         <Outlet />

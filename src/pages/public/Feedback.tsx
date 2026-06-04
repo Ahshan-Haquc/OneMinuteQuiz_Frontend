@@ -3,6 +3,7 @@ import starIcon from "@/assets/icons/star.png";
 import NavBar from "@/components/NavBar";
 import { useNavigate } from "react-router-dom";
 import { useSubmitFeedbackMutation } from "@/redux/api/endpoints/feedbackApi";
+import { toast } from "react-toastify";
 
 const Feedback = () => {
   const [selectedRating, setSelectedRating] = useState(5);
@@ -20,10 +21,10 @@ const Feedback = () => {
         rating: selectedRating,
       }).unwrap();
 
-      alert("Thanks for your feedback!!!");
+      toast.success("Thanks for your feedback!!!");
       navigate("/");
     } catch (error) {
-      alert("Feedback not sent. Please try later!");
+      toast.error("Feedback not sent. Please try later!");
     }
   };
 
