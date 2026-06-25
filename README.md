@@ -14,7 +14,7 @@ This frontend application provides:
 * JWT authentication flow integration
 * Protected user and admin routes
 * Dynamic game state management using React hooks and Redux Toolkit
-* Modern UI/UX with animations and game-focused layouts
+* Modern UI/UX with animations and game-focused layouts.
 
 ## Implemented Quiz Games
 
